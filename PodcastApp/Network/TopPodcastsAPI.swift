@@ -15,10 +15,10 @@ class TopPodcastsAPI {
     func fetchTopPodcasts(limit: Int = 50, completion: @escaping (Result<Response, APIError>) -> Void) {
         
         //Create the endoint:
-        guard let endpointURL = PodcastEndpoint.topPodcasts(limit: limit).request.url?.absoluteString else { return }
+        guard let endpointURL = PodcastEndpoint.topPodcasts(limit: limit).request.url else { return }
         
-        API.request(url: endpointURL) { result in
-            switch result {
+        API.request(url: endpointURL) { apiResult in
+            switch apiResult {
             case .success(let data):
                 do {
                     let result = try self.decoder.decode(Response.self, from: data)
@@ -26,10 +26,10 @@ class TopPodcastsAPI {
                         completion(.success(result))
                     }
                 } catch let error {
-                    completion(.failure(.decodingError(error as! DecodingError)))
+                    completion(.failure(.decodingError(error)))
                 }
             case .failure(let error):
-                completion(.failure(APIError.networkingError(error)))
+                completion(.failure(.networkingError(error)))
             }
         }
     }

@@ -10,5 +10,5 @@ import Foundation
 
 enum APIError: Error {
     case networkingError(Error)
-    case decodingError(DecodingError)
+    case decodingError(Error)
 }

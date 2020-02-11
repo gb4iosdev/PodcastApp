@@ -19,5 +19,13 @@ class SearchResult {
         self.title = title
         self.author = author
     }
-    
+}
+
+extension SearchResult {
+    convenience init(podcastResult: TopPodcastsAPI.PodcastResult) {
+        self.init(
+            artworkUrl: URL(string: podcastResult.artworkUrl100),
+            title: podcastResult.name,
+            author: podcastResult.artistName)
+    }
 }

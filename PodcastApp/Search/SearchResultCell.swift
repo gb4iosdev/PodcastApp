@@ -69,7 +69,7 @@ class SearchResultCell: UITableViewCell {
                     imageCache.setObject(imageToCache, forKey: url.absoluteString as NSString)
                     self.artworkImageView.alpha = 0
                     self.artworkImageView.image = imageToCache
-                    UIView.animate(withDuration: 1.5) {
+                    UIView.animate(withDuration: 0.5) {
                         self.artworkImageView.alpha = 1.0
                     }
                 }
