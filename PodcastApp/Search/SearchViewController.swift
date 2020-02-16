@@ -17,6 +17,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     private var results: [SearchResult] = []
     
     private let recommendedPodcastsClient = TopPodcastsAPI()
+    private let searchClient = PodcastSearchAPI()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,8 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         navigationItem.searchController = search
-        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.searchController!.searchBar.backgroundColor = .black
         
         loadRecommendedPodcasts()
     }
@@ -39,7 +41,9 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
             case .success(let response):
                 self.recommendedPodcasts = response.feed.results.map(SearchResult.init)
                 self.results = self.recommendedPodcasts
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             case .failure(let error):
                 print("Error loading recommended podcasts: \(error.localizedDescription)")
             }
@@ -49,7 +53,29 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     //MARK: - Search Results Updating
     
     func updateSearchResults(for searchController: UISearchController) {
+        let term = searchController.searchBar.text ?? ""
+        if !term.isEmpty {
+            searchClient.search(for: term) { result in
+                switch result {
+                case .success(let response):
+                    self.results = response.results.map(SearchResult.init)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                case .failure(let error):
+                    print("Error searching for podcasts: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            resetToRecommendedPodcasts()
+        }
         
+        
+    }
+    
+    private func resetToRecommendedPodcasts() {
+        results = recommendedPodcasts
+        tableView.reloadData()
     }
     
 

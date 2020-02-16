@@ -8,29 +8,18 @@
 
 import Foundation
 
-class TopPodcastsAPI {
+class TopPodcastsAPI: API {
     
-    let decoder = JSONDecoder()
+    var decoder = JSONDecoder()
     
     func fetchTopPodcasts(limit: Int = 50, completion: @escaping (Result<Response, APIError>) -> Void) {
         
         //Create the endoint:
         guard let endpointURL = PodcastEndpoint.topPodcasts(limit: limit).request.url else { return }
         
-        API.request(url: endpointURL) { apiResult in
-            switch apiResult {
-            case .success(let data):
-                do {
-                    let result = try self.decoder.decode(Response.self, from: data)
-                    DispatchQueue.main.async {
-                        completion(.success(result))
-                    }
-                } catch let error {
-                    completion(.failure(.decodingError(error)))
-                }
-            case .failure(let error):
-                completion(.failure(.networkingError(error)))
-            }
+        //Perform the low level call (request) then pass the results to the JSON fetcher
+        fetchData(from: endpointURL) { result in
+            self.parseJSON(apiResult: result, completion: completion)
         }
     }
 }

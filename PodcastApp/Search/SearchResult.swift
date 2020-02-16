@@ -28,4 +28,11 @@ extension SearchResult {
             title: podcastResult.name,
             author: podcastResult.artistName)
     }
+    
+    convenience init(searchResult: PodcastSearchAPI.PodcastSearchResult) {
+        self.init(
+            artworkUrl: URL(string: searchResult.artworkUrl100),
+            title: searchResult.collectionName,
+            author: searchResult.artistName)
+    }
 }

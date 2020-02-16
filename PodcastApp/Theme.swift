@@ -15,12 +15,18 @@ struct Theme {
                                 
         //Returns a Tab Bar proxy – everything done to this Tab Bar will apply to all in the app.
         let tabBar = UITabBar.appearance()
-        tabBar.barTintColor = Colours.grey3
+        tabBar.barTintColor = Colours.grey4
  
         //Returns a NavigationBar proxy – everything done to this Navigation Bar will apply to all in the app.
         let navigationBar = UINavigationBar.appearance()
-        navigationBar.barTintColor = Colours.grey3
+        navigationBar.barTintColor = Colours.grey4
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colours.grey0]
+        
+        let searchBarTextFields = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        searchBarTextFields.defaultTextAttributes = [
+            .foregroundColor : Colours.grey1,
+            .font : UIFont.boldSystemFont(ofSize: 14)
+        ]
     }
  
     struct Colours {
