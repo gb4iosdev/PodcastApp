@@ -32,6 +32,10 @@
 		86AEB64D23F9D97E002E0393 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEB64C23F9D97E002E0393 /* Podcast.swift */; };
 		86AEB64F23F9DB6B002E0393 /* PodcastLoadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEB64E23F9DB6B002E0393 /* PodcastLoadingError.swift */; };
 		86AEB65123F9E895002E0393 /* PodcastFeedLoaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEB65023F9E895002E0393 /* PodcastFeedLoaderTest.swift */; };
+		86C5FCC423FA1E0200F9CEC5 /* PodcastDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C5FCC323FA1E0200F9CEC5 /* PodcastDetail.storyboard */; };
+		86C5FCC623FA1E4400F9CEC5 /* PodcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5FCC523FA1E4400F9CEC5 /* PodcastDetailViewController.swift */; };
+		86C5FCC823FA275400F9CEC5 /* PodcastDetailHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5FCC723FA275400F9CEC5 /* PodcastDetailHeaderViewController.swift */; };
+		86C5FCCA23FA2C3300F9CEC5 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5FCC923FA2C3300F9CEC5 /* SpinnerViewController.swift */; };
 		894B830F62A1F91AC3C40702 /* Pods_PodcastAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B76A6AEADACF2A88393370 /* Pods_PodcastAppTests.framework */; };
 		EFC9E959627F0F2ACB5C407F /* Pods_PodcastApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338CE9CC71F332BC0CD2C1FC /* Pods_PodcastApp.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +81,10 @@
 		86AEB64C23F9D97E002E0393 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		86AEB64E23F9DB6B002E0393 /* PodcastLoadingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastLoadingError.swift; sourceTree = "<group>"; };
 		86AEB65023F9E895002E0393 /* PodcastFeedLoaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastFeedLoaderTest.swift; sourceTree = "<group>"; };
+		86C5FCC323FA1E0200F9CEC5 /* PodcastDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PodcastDetail.storyboard; sourceTree = "<group>"; };
+		86C5FCC523FA1E4400F9CEC5 /* PodcastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewController.swift; sourceTree = "<group>"; };
+		86C5FCC723FA275400F9CEC5 /* PodcastDetailHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailHeaderViewController.swift; sourceTree = "<group>"; };
+		86C5FCC923FA2C3300F9CEC5 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		94098E1768894F4AB91F6C5C /* Pods-PodcastAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodcastAppTests.debug.xcconfig"; path = "Target Support Files/Pods-PodcastAppTests/Pods-PodcastAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AE24F2AE4729526A1C5156E1 /* Pods-PodcastApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodcastApp.debug.xcconfig"; path = "Target Support Files/Pods-PodcastApp/Pods-PodcastApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AEAE9E7C31D83910BA76E1D9 /* Pods-PodcastAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodcastAppTests.release.xcconfig"; path = "Target Support Files/Pods-PodcastAppTests/Pods-PodcastAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +151,7 @@
 				8675B2DB23F0E85200DE3B40 /* API.swift */,
 				863C369723F22BD800591E09 /* APIError.swift */,
 				8675B2D223F0E3F500DE3B40 /* Endpoint */,
+				86C5FCC923FA2C3300F9CEC5 /* SpinnerViewController.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -195,6 +204,7 @@
 				86AEB64823F9D93F002E0393 /* Data */,
 				8675B2D123F0E3EC00DE3B40 /* Network */,
 				861895AC23E7B10700A8350D /* Utility */,
+				86C5FCC223FA1DCE00F9CEC5 /* Podcast Detail */,
 				861895A523E7AC8C00A8350D /* Search */,
 				86A4B13C23E793EC001EA316 /* AppDelegate.swift */,
 				86A4B13E23E793EC001EA316 /* SceneDelegate.swift */,
@@ -222,6 +232,16 @@
 				86AEB64C23F9D97E002E0393 /* Podcast.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		86C5FCC223FA1DCE00F9CEC5 /* Podcast Detail */ = {
+			isa = PBXGroup;
+			children = (
+				86C5FCC323FA1E0200F9CEC5 /* PodcastDetail.storyboard */,
+				86C5FCC523FA1E4400F9CEC5 /* PodcastDetailViewController.swift */,
+				86C5FCC723FA275400F9CEC5 /* PodcastDetailHeaderViewController.swift */,
+			);
+			path = "Podcast Detail";
 			sourceTree = "<group>";
 		};
 		928F54CD48DE37C14B1D6044 /* Frameworks */ = {
@@ -326,6 +346,7 @@
 			files = (
 				86A4B14923E793ED001EA316 /* LaunchScreen.storyboard in Resources */,
 				86A4B14623E793ED001EA316 /* Assets.xcassets in Resources */,
+				86C5FCC423FA1E0200F9CEC5 /* PodcastDetail.storyboard in Resources */,
 				861895A723E7ACE500A8350D /* Search.storyboard in Resources */,
 				86A4B14423E793EC001EA316 /* Main.storyboard in Resources */,
 			);
@@ -411,14 +432,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C5FCCA23FA2C3300F9CEC5 /* SpinnerViewController.swift in Sources */,
 				861895AB23E7B0C400A8350D /* SearchViewController.swift in Sources */,
 				8675B2D423F0E40600DE3B40 /* Endpoint.swift in Sources */,
+				86C5FCC823FA275400F9CEC5 /* PodcastDetailHeaderViewController.swift in Sources */,
 				86A4B15123E794F1001EA316 /* Theme.swift in Sources */,
 				8675B2D623F0E43800DE3B40 /* ParameterKey.swift in Sources */,
 				861895B023E7B20F00A8350D /* UITableView+ReusableView.swift in Sources */,
 				8675B2DA23F0E46700DE3B40 /* EndpointExamples.swift in Sources */,
 				86A4B13D23E793EC001EA316 /* AppDelegate.swift in Sources */,
 				861895AE23E7B14000A8350D /* ReusableView.swift in Sources */,
+				86C5FCC623FA1E4400F9CEC5 /* PodcastDetailViewController.swift in Sources */,
 				86AEB64B23F9D970002E0393 /* PodcastFeedLoader.swift in Sources */,
 				863C369823F22BD800591E09 /* APIError.swift in Sources */,
 				8675B2DC23F0E85200DE3B40 /* API.swift in Sources */,

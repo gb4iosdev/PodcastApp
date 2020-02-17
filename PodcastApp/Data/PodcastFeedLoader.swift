@@ -100,6 +100,7 @@ class PodcastFeedLoader {
         podcast.author = author
         podcast.artworkURL = logoURL
         podcast.description = description
+        podcast.primaryGenre = atom.categories?.first?.attributes?.label
         
         return podcast
     }
@@ -124,6 +125,7 @@ class PodcastFeedLoader {
         podcast.author = author
         podcast.artworkURL = logoURL
         podcast.description = description
+        podcast.primaryGenre = rss.categories?.first?.value ?? rss.iTunes?.iTunesCategories?.first?.attributes?.text
         
         return podcast
     }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iqJ-Lx-ayg">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Podcast Detail View Controller-->
+        <scene sceneID="UnV-sO-OGT">
+            <objects>
+                <tableViewController id="iqJ-Lx-ayg" customClass="PodcastDetailViewController" customModule="PodcastApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PDA-0b-t4M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="8H9-i5-Uop">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="580"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <connections>
+                                <segue destination="rQt-5M-hkL" kind="embed" id="sjG-hk-xdV"/>
+                            </connections>
+                        </containerView>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8DP-uX-Juj">
+                                <rect key="frame" x="0.0" y="608" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8DP-uX-Juj" id="tVu-nO-3au">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iqJ-Lx-ayg" id="9KI-m6-SVg"/>
+                            <outlet property="delegate" destination="iqJ-Lx-ayg" id="RjK-4T-5ss"/>
+                        </connections>
+                    </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0s-JC-PMh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-30.434782608695656" y="116.51785714285714"/>
+        </scene>
+        <!--Podcast Detail Header View Controller-->
+        <scene sceneID="NfE-04-mHB">
+            <objects>
+                <viewController id="rQt-5M-hkL" customClass="PodcastDetailHeaderViewController" customModule="PodcastApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PS1-Rp-icr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LZi-3e-1E4">
+                                <rect key="frame" x="10" y="381" width="394" height="93.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tP6-9A-S0R" userLabel="Labels VStack">
+                                        <rect key="frame" x="0.0" y="22" width="214" height="49.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Podcast Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iID-go-xit">
+                                                <rect key="frame" x="0.0" y="0.0" width="97.5" height="12"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="12" id="UmF-eh-3DW"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" red="0.56289" green="0.56259999999999999" blue="0.57999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05l-fG-KBx">
+                                                <rect key="frame" x="0.0" y="15" width="45" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                <color key="textColor" red="0.30403999999999998" green="0.30359999999999998" blue="0.33000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxF-KQ-Tnz">
+                                                <rect key="frame" x="0.0" y="35" width="35" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                <color key="textColor" red="0.30403999999999998" green="0.30359999999999998" blue="0.33000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgT-aY-b2H">
+                                        <rect key="frame" x="214" y="32" width="180" height="30"/>
+                                        <state key="normal" title="SUBSCRIBE"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuC-RP-I5Z">
+                                <rect key="frame" x="0.0" y="482.5" width="415" height="0.0"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oko-C2-Ufw">
+                                <rect key="frame" x="17" y="494" width="381" height="65.5"/>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies dui a lectus dictum, ac laoreet risus dapibus. Curabitur nec luctus nisl. Ut pellentesque iaculis venenatis. Mauris commodo non purus sit amet sollicitudin. Fusce cursus mauris velit, vel lacinia dui condimentum eget. In hac habitasse platea dictumst. Sed purus libero, ultricies a luctus vel, convallis id lorem. Morbi interdum tincidunt elit. Etiam a mollis lectus. Vestibulum tempus ipsum libero. </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.56289" green="0.56259999999999999" blue="0.57999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Maw-Fc-xqS">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="373"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="373" id="Tsq-4I-CQK"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.075999999999999998" green="0.071999999999999995" blue="0.080000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZuC-RP-I5Z" firstAttribute="top" secondItem="PS1-Rp-icr" secondAttribute="top" constant="482.5" id="1A0-bO-2qS"/>
+                            <constraint firstItem="LZi-3e-1E4" firstAttribute="leading" secondItem="Maw-Fc-xqS" secondAttribute="leading" constant="10" id="1ra-za-V3g"/>
+                            <constraint firstItem="ZuC-RP-I5Z" firstAttribute="top" secondItem="LZi-3e-1E4" secondAttribute="bottom" constant="8" id="7W4-6j-Rna"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="oko-C2-Ufw" secondAttribute="bottom" constant="20.5" id="ARF-QU-2ha"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oko-C2-Ufw" secondAttribute="trailing" constant="-4" id="Do2-AD-47L"/>
+                            <constraint firstAttribute="trailing" secondItem="Maw-Fc-xqS" secondAttribute="trailing" id="LYw-v3-th6"/>
+                            <constraint firstItem="ZuC-RP-I5Z" firstAttribute="centerX" secondItem="oko-C2-Ufw" secondAttribute="centerX" id="Sug-Ve-jFt"/>
+                            <constraint firstItem="oko-C2-Ufw" firstAttribute="top" secondItem="ZuC-RP-I5Z" secondAttribute="bottom" constant="11.5" id="hGn-qJ-4WU"/>
+                            <constraint firstItem="Maw-Fc-xqS" firstAttribute="leading" secondItem="PS1-Rp-icr" secondAttribute="leading" id="ijt-lp-i5A"/>
+                            <constraint firstItem="LZi-3e-1E4" firstAttribute="top" secondItem="Maw-Fc-xqS" secondAttribute="bottom" constant="8" id="qRE-Ph-dLS"/>
+                            <constraint firstItem="oko-C2-Ufw" firstAttribute="leading" secondItem="PS1-Rp-icr" secondAttribute="leadingMargin" constant="-3" id="qdK-VC-N8b"/>
+                            <constraint firstItem="Maw-Fc-xqS" firstAttribute="top" secondItem="PS1-Rp-icr" secondAttribute="top" id="xRx-xr-gcj"/>
+                            <constraint firstAttribute="trailing" secondItem="LZi-3e-1E4" secondAttribute="trailing" constant="10" id="yPU-9X-vxb"/>
+                            <constraint firstItem="ZuC-RP-I5Z" firstAttribute="leading" secondItem="PS1-Rp-icr" secondAttribute="leadingMargin" constant="-20" id="zYe-pG-4Bd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="authorLabel" destination="05l-fG-KBx" id="cSG-je-8P3"/>
+                        <outlet property="descriptionLabel" destination="oko-C2-Ufw" id="d6t-yA-9AY"/>
+                        <outlet property="genreLabel" destination="jxF-KQ-Tnz" id="XgO-A5-aDH"/>
+                        <outlet property="imageView" destination="Maw-Fc-xqS" id="vKW-9u-imL"/>
+                        <outlet property="subscribeButton" destination="fgT-aY-b2H" id="bd8-0s-ajJ"/>
+                        <outlet property="titleLabel" destination="iID-go-xit" id="4ts-fI-w38"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mb5-tA-Hwn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="869.56521739130437" y="-82.366071428571431"/>
+        </scene>
+    </scenes>
+</document>
