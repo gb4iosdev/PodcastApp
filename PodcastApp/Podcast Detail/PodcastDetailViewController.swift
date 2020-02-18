@@ -32,6 +32,8 @@ class PodcastDetailViewController: UITableViewController {
         view.addSubview(spinner.view)
         spinner.didMove(toParent: self)
         
+        
+        
         PodcastFeedLoader().fetch(feed: feedURL) { result in
             
             spinner.willMove(toParent: nil)
@@ -46,8 +48,4 @@ class PodcastDetailViewController: UITableViewController {
             }
         }
     }
-    
-    
 }
-
-

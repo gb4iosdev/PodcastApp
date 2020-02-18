@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TopPodcastsAPI: API {
+class TopPodcastsAPI: JSONAPI {
     
     var decoder = JSONDecoder()
     

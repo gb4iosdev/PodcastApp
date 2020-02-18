@@ -25,7 +25,7 @@ class PodcastDetailHeaderViewController: UIViewController {
         }
     }
     
-    var downloadingURL: URL?
+    let imageAPI = ImageAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,37 +42,20 @@ class PodcastDetailHeaderViewController: UIViewController {
             return
         }
         
-        //If we have an image in the cache, use that and return
-        if let imageFromCache = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
-          imageView.image = imageFromCache
-          return
-        }
-        
-        //If no image in the cache, need to fetch.
-        //Record the url we're fetching for:
-        downloadingURL = url
-        
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            
-            if let err = error {
-            print(err.localizedDescription)
-            return
-            }
-            
-            //Don't proceed if the url being downloaded is no longer current for this cell.
-            guard url == self.downloadingURL else { return }
-            
-            DispatchQueue.main.async {
-                if let retreivedData = data, let imageToCache = UIImage(data: retreivedData) {
-                    imageCache.setObject(imageToCache, forKey: url.absoluteString as NSString)
+        imageAPI.fetchImage(at: url) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
                     self.imageView.alpha = 0
-                    self.imageView.image = imageToCache
+                    self.imageView.image = image
                     UIView.animate(withDuration: 0.5) {
                         self.imageView.alpha = 1.0
                     }
                 }
+            case .failure(let error):
+                print("Error downloading image: \(error.localizedDescription)")
             }
-          }).resume()
+        }
         
         titleLabel.text = podcast.title
         authorLabel.text = podcast.author

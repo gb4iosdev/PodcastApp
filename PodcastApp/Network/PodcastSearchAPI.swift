@@ -8,11 +8,11 @@
 
 import Foundation
 
-class PodcastSearchAPI: API {
+class PodcastSearchAPI: JSONAPI {
     
     let decoder = JSONDecoder()
     
-    private var activeSearchTask: URLSessionDataTask?
+    private var activeSearchTask: URLSessionDataTask?   //Supports cancellation due to the changes in search bar text
     
     func search(for term: String, completion: @escaping (Result<Response, APIError>) -> Void) {
         
