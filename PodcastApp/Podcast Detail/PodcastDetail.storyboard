@@ -58,15 +58,15 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptl-5z-2c4" customClass="GradientBackgroundView" customModule="PodcastApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="209" width="414" height="265.5"/>
+                                <rect key="frame" x="0.0" y="184.5" width="414" height="259.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LZi-3e-1E4">
-                                        <rect key="frame" x="8" y="188" width="398" height="49.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LZi-3e-1E4">
+                                        <rect key="frame" x="8" y="188" width="398" height="53.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tP6-9A-S0R" userLabel="Labels VStack">
-                                                <rect key="frame" x="0.0" y="0.0" width="216" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="228" height="53.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Podcast Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iID-go-xit">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Podcast Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iID-go-xit">
                                                         <rect key="frame" x="0.0" y="0.0" width="97.5" height="12"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="UmF-eh-3DW"/>
@@ -75,22 +75,30 @@
                                                         <color key="textColor" red="0.56289" green="0.56259999999999999" blue="0.57999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05l-fG-KBx">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05l-fG-KBx">
                                                         <rect key="frame" x="0.0" y="15" width="45" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                         <color key="textColor" red="0.30403999999999998" green="0.30359999999999998" blue="0.33000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxF-KQ-Tnz">
-                                                        <rect key="frame" x="0.0" y="35" width="35" height="14.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxF-KQ-Tnz" customClass="GenreLabel" customModule="PodcastApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="35" width="47" height="18.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                         <color key="textColor" red="0.30403999999999998" green="0.30359999999999998" blue="0.33000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="horizontalInset">
+                                                                <real key="value" value="6"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="verticalInset">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgT-aY-b2H">
-                                                <rect key="frame" x="216" y="10" width="182" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgT-aY-b2H" customClass="SubscribeButton" customModule="PodcastApp" customModuleProvider="target">
+                                                <rect key="frame" x="228" y="4" width="170" height="46"/>
                                                 <state key="normal" title="SUBSCRIBE"/>
                                             </button>
                                         </subviews>
@@ -98,7 +106,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottomMargin" secondItem="LZi-3e-1E4" secondAttribute="bottom" constant="20" id="Buy-rF-Z0g"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="LZi-3e-1E4" secondAttribute="bottom" constant="10" id="Buy-rF-Z0g"/>
                                     <constraint firstItem="LZi-3e-1E4" firstAttribute="leading" secondItem="ptl-5z-2c4" secondAttribute="leadingMargin" id="XJ2-dr-MUw"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="LZi-3e-1E4" secondAttribute="trailing" id="caH-bP-B0K"/>
                                     <constraint firstItem="LZi-3e-1E4" firstAttribute="top" secondItem="ptl-5z-2c4" secondAttribute="topMargin" constant="180" id="dih-Rq-NG6"/>
@@ -118,12 +126,15 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuC-RP-I5Z">
-                                <rect key="frame" x="0.0" y="482.5" width="415" height="0.0"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuC-RP-I5Z" customClass="SeparatorView" customModule="PodcastApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="452" width="415" height="12"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="OGN-C3-LQg"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oko-C2-Ufw">
-                                <rect key="frame" x="17" y="494" width="381" height="65.5"/>
+                                <rect key="frame" x="17" y="475.5" width="381" height="84"/>
                                 <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies dui a lectus dictum, ac laoreet risus dapibus. Curabitur nec luctus nisl. Ut pellentesque iaculis venenatis. Mauris commodo non purus sit amet sollicitudin. Fusce cursus mauris velit, vel lacinia dui condimentum eget. In hac habitasse platea dictumst. Sed purus libero, ultricies a luctus vel, convallis id lorem. Morbi interdum tincidunt elit. Etiam a mollis lectus. Vestibulum tempus ipsum libero. </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.56289" green="0.56259999999999999" blue="0.57999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -132,7 +143,6 @@
                         </subviews>
                         <color key="backgroundColor" red="0.11" green="0.11" blue="0.11" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ZuC-RP-I5Z" firstAttribute="top" secondItem="PS1-Rp-icr" secondAttribute="top" constant="482.5" id="1A0-bO-2qS"/>
                             <constraint firstAttribute="bottomMargin" secondItem="oko-C2-Ufw" secondAttribute="bottom" constant="20.5" id="ARF-QU-2ha"/>
                             <constraint firstAttribute="trailing" secondItem="ptl-5z-2c4" secondAttribute="trailing" id="BIT-FF-DCj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oko-C2-Ufw" secondAttribute="trailing" constant="-4" id="Do2-AD-47L"/>

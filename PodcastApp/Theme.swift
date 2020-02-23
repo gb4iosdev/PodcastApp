@@ -38,5 +38,6 @@ struct Theme {
         static let grey5 = UIColor(hue: 0.75, saturation: 0.10, brightness: 0.08, alpha: 1.0)
         static let purple = UIColor(hue: 0.73, saturation: 0.78, brightness: 0.98, alpha: 1.0)
         static let purpleLight = UIColor(hue: 0.70, saturation: 0.28, brightness: 0.71, alpha: 1.0)
+        static let purpleBright = UIColor(red: 0.63, green: 0.006, blue: 1.00, alpha: 1.00)
     }
 }
