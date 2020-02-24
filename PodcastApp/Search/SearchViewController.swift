@@ -11,12 +11,10 @@ import UIKit
 class SearchViewController: UITableViewController, UISearchResultsUpdating {
     
     var recommendedPodcasts: [SearchResult] = []
-    //        SearchResult(artworkUrl: URL(string: "https://is3-ssl.mzstatic.com/image/thumb/Music114/v4/95/42/da/9542da30-eaaf-ead9-ac1e-0be9da1931ab/source/200x200bb.png"), title: "The Dropout", author: "ABC News"),
-    //        SearchResult(artworkUrl: URL(string: "https://is2-ssl.mzstatic.com/image/thumb/Music125/v4/ce/3d/b4/ce3db4c8-86ba-29ca-8cb0-4cd68388efeb/source/200x200bb.png"), title: "Dirty John", author: "L.A. Times | Wondery")
     
     private var results: [SearchResult] = []
     
-    private let recommendedPodcastsClient = TopPodcastsAPI()
+    
     private let searchClient = PodcastSearchAPI()
 
     override func viewDidLoad() {

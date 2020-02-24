@@ -16,11 +16,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" rowHeight="94" id="2kJ-Ht-tN0" customClass="SearchResultCell" customModule="PodcastApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="94"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="2kJ-Ht-tN0" customClass="SearchResultCell" customModule="PodcastApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="94.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2kJ-Ht-tN0" id="MOw-sW-g4y">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="94.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hIz-DF-tsd">
@@ -31,21 +31,21 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Uv-32-pHK">
-                                            <rect key="frame" x="98" y="14" width="292" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                            <rect key="frame" x="98" y="12" width="292" height="26.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJ4-yH-0eD">
-                                            <rect key="frame" x="98" y="36.5" width="292" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJ4-yH-0eD">
+                                            <rect key="frame" x="98" y="38.5" width="292" height="18"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.075999999999999998" green="0.071999999999999995" blue="0.080000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstItem="9Uv-32-pHK" firstAttribute="top" secondItem="MOw-sW-g4y" secondAttribute="top" constant="14" id="999-uY-0Ut"/>
+                                        <constraint firstItem="9Uv-32-pHK" firstAttribute="top" secondItem="MOw-sW-g4y" secondAttribute="top" constant="12" id="999-uY-0Ut"/>
                                         <constraint firstItem="BJ4-yH-0eD" firstAttribute="firstBaseline" secondItem="9Uv-32-pHK" secondAttribute="baseline" constant="20" symbolType="layoutAnchor" id="DPf-gf-z3o"/>
                                         <constraint firstItem="BJ4-yH-0eD" firstAttribute="leading" secondItem="9Uv-32-pHK" secondAttribute="leading" id="Daf-M8-elt"/>
                                         <constraint firstItem="BJ4-yH-0eD" firstAttribute="width" secondItem="9Uv-32-pHK" secondAttribute="width" id="Srt-DS-JmW"/>
@@ -53,6 +53,7 @@
                                         <constraint firstItem="hIz-DF-tsd" firstAttribute="top" secondItem="MOw-sW-g4y" secondAttribute="top" constant="10" id="cyd-tZ-JWk"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hIz-DF-tsd" secondAttribute="bottom" constant="10" id="j4t-wP-wkm"/>
                                         <constraint firstItem="hIz-DF-tsd" firstAttribute="leading" secondItem="MOw-sW-g4y" secondAttribute="leading" constant="12" id="t3W-xl-zmF"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BJ4-yH-0eD" secondAttribute="bottom" constant="20" id="z7L-nJ-cUO"/>
                                         <constraint firstAttribute="trailing" secondItem="9Uv-32-pHK" secondAttribute="trailing" constant="24" id="z8p-hV-kiw"/>
                                     </constraints>
                                 </tableViewCellContentView>

@@ -16,4 +16,13 @@ enum PodcastLoadingError: Error {
     case feedParsingError
     case missingAttribute(String)
     case unknownDataFormat
+    case feedMissingData(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .feedMissingData(let key): return "Feed is missing data for key: \(key)"
+        case .networkingError(let error): return "Network error fetching podcast: \(error.localizedDescription)"
+        case .feedParsingError: return "Feed Parsking Error"
+        }
+    }
 }
