@@ -14,6 +14,8 @@ enum PodcastEndpoint {
     //Example URL: https://rss.itunes.apple.com/api/v1/ca/podcasts/top-podcasts/all/27/non-explicit.json
     case search(searchTerm: String)
     //Example URL: https://itunes.apple.com/search?country=ca&media=podcast&entity=podcast&attribute=titleTerm&term=reply all
+    case lookup(id: String)
+    //Example URL: https://itunes.apple.com/lookup?id=1459712981&entity=podcast
 }
 
 //conforms to the Endpoint protocol to assist with URL creation.
@@ -24,6 +26,8 @@ extension PodcastEndpoint: Endpoint {
             return "/api/v1/ca/podcasts/top-podcasts/all/\(limit)/non-explicit.json"
         case .search:
             return "/search/"
+        case .lookup:
+            return "/lookup/"
         }
     }
     
@@ -42,8 +46,9 @@ extension PodcastEndpoint: Endpoint {
             result.append(URLQueryItem(name: ParameterKey.entity.rawValue, value: "podcast"))
             result.append(URLQueryItem(name: ParameterKey.attribute.rawValue, value: "titleTerm"))
             result.append(URLQueryItem(name: ParameterKey.searchTerm.rawValue, value: searchTerm))
+        case .lookup(let id):
+            result.append(URLQueryItem(name: ParameterKey.id.rawValue, value: id))
         }
-        
         return result
     }
     
@@ -51,7 +56,7 @@ extension PodcastEndpoint: Endpoint {
         switch self {
         case .topPodcasts:
             return "https://rss.itunes.apple.com"
-        case .search:
+        case .search, .lookup:
             return "https://itunes.apple.com"
         }
         

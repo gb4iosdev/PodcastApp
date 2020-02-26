@@ -10,29 +10,37 @@ import Foundation
 
 class SearchResult {
     
-    let title: String
-    let author: String
-    let artworkUrl: URL?
+    var id: String
+    var title: String
+    var author: String
+    var artworkUrl: URL?
+    var feedURL: URL?
     
-    init(artworkUrl: URL?, title: String, author: String) {
+    init(id: String, artworkUrl: URL?, title: String, author: String, feedURL: URL?) {
+        self.id = id
         self.artworkUrl = artworkUrl
         self.title = title
         self.author = author
+        self.feedURL = feedURL
     }
 }
 
 extension SearchResult {
     convenience init(podcastResult: TopPodcastsAPI.PodcastResult) {
         self.init(
+            id: podcastResult.id,
             artworkUrl: URL(string: podcastResult.artworkUrl100),
             title: podcastResult.name,
-            author: podcastResult.artistName)
+            author: podcastResult.artistName,
+            feedURL: nil)
     }
     
     convenience init(searchResult: PodcastSearchAPI.PodcastSearchResult) {
         self.init(
+            id: String(searchResult.collectionId),
             artworkUrl: URL(string: searchResult.artworkUrl100),
             title: searchResult.collectionName,
-            author: searchResult.artistName)
+            author: searchResult.artistName,
+            feedURL: URL(string: searchResult.feedUrl))
     }
 }

@@ -13,9 +13,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     var recommendedPodcasts: [SearchResult] = []
     
     private var results: [SearchResult] = []
-    
-    
-    private let searchClient = PodcastSearchAPI()
+    private let dataManager = PodCastDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +32,10 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     private func loadRecommendedPodcasts() {
-        recommendedPodcastsClient.fetchTopPodcasts { result in
+        dataManager.recommendedPodcasts { result in
             switch result {
-            case .success(let response):
-                self.recommendedPodcasts = response.feed.results.map(SearchResult.init)
+            case .success(let podcastResults):
+                self.recommendedPodcasts = podcastResults
                 self.results = self.recommendedPodcasts
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -53,22 +51,20 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let term = searchController.searchBar.text ?? ""
         if !term.isEmpty {
-            searchClient.search(for: term) { result in
+            dataManager.search(for: term) { result in
                 switch result {
-                case .success(let response):
-                    self.results = response.results.map(SearchResult.init)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                    case .success(let searchResults):
+                        self.results = searchResults
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    case .failure(let error):
+                        print("Error searching for podcasts: \(error.localizedDescription)")
                     }
-                case .failure(let error):
-                    print("Error searching for podcasts: \(error.localizedDescription)")
-                }
             }
         } else {
             resetToRecommendedPodcasts()
         }
-        
-        
     }
     
     private func resetToRecommendedPodcasts() {
@@ -92,8 +88,41 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
         return cell
     }
     
+    // MARK: - Table view delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let result = results[indexPath.row]
         
+            if let feed = result.feedURL {
+                DispatchQueue.main.async {
+                    self.showPodcast(with: feed)
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }
+            } else {
+                self.dataManager.lookup(podcastID: result.id) { result in
+                    switch result {
+                    case .success(let podcast):
+                        if let feed = podcast?.feedURL {
+                            DispatchQueue.main.async {
+                                self.showPodcast(with: feed)
+                            }
+                        } else {
+                            print("Podcast not found")
+                        }
+                    case .failure(let error):
+                        print("Error loading podcast: \(error.localizedDescription)")
+                    }
+                    DispatchQueue.main.async {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
+                }
+            }
+    }
+    
+    private func showPodcast(with feedURL: URL) {
+        let detailVC = UIStoryboard(name: "PodcastDetail", bundle: nil).instantiateInitialViewController() as! PodcastDetailViewController
+        detailVC.feedURL = feedURL
+        show(detailVC, sender: self)
     }
 
 }

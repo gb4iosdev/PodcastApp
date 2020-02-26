@@ -16,4 +16,5 @@ enum ParameterKey: String {
     case entity
     case attribute
     case searchTerm = "term"
+    case id
 }

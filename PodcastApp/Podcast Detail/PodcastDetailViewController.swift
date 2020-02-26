@@ -25,7 +25,10 @@ class PodcastDetailViewController: UITableViewController {
         super.viewDidLoad()
         
         headerViewController = children.compactMap { $0 as? PodcastDetailHeaderViewController }.first
-        
+        loadPodcast()
+    }
+    
+    private func loadPodcast() {
         let spinner = SpinnerViewController()
         addChild(spinner)
         spinner.view.frame = view.frame
@@ -35,7 +38,6 @@ class PodcastDetailViewController: UITableViewController {
         
         
         PodcastFeedLoader().fetch(feed: feedURL) { result in
-            
             spinner.willMove(toParent: nil)
             spinner.view.removeFromSuperview()
             spinner.removeFromParent()
@@ -44,7 +46,15 @@ class PodcastDetailViewController: UITableViewController {
             case .success(let podcast):
                 self.podcast = podcast
             case .failure(let error):
-                print("Error: \(error)")
+                self.headerViewController.clearUI()
+                let alert = UIAlertController(title: "Failed to Load Podcast", message: "Error Loading Feed: \(error.localizedDescription)", preferredStyle: .alert)
+                let retryAction = UIAlertAction(title: "Retry", style: .default) { _ in
+                    self.loadPodcast()
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alert.addAction(retryAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

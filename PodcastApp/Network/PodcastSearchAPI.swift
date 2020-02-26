@@ -27,6 +27,24 @@ class PodcastSearchAPI: JSONAPI {
             self.parseJSON(apiResult: result, completion: completion)
         }
     }
+    
+    func lookup(id: String, completion: @escaping (Result<SearchResult?, APIError>) -> Void) {
+        
+        //Create the endoint:
+        guard let endpointURL = PodcastEndpoint.lookup(id: id).request.url else { return }
+        
+        fetchData(from: endpointURL) { result in
+            self.parseJSON (apiResult: result) { (result: Result<Response, APIError>) in
+                switch result {
+                case .success(let response):
+                    let result = response.results.first.flatMap(SearchResult.init)
+                    completion(.success(result))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }
 
 extension PodcastSearchAPI {
@@ -38,9 +56,11 @@ extension PodcastSearchAPI {
 
     struct PodcastSearchResult: Decodable {
         let artistName: String
+        let collectionId: Int
         let collectionName: String
         let artworkUrl100: String
         let genreIds: [String]
         let genres: [String]
+        let feedUrl: String
     }
 }

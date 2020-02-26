@@ -27,15 +27,28 @@ class PodcastDetailHeaderViewController: UIViewController {
     
     let imageAPI = ImageAPI()
     
+    func clearUI() {
+        imageView.image = nil
+        titleLabel.text = nil
+        authorLabel.text = nil
+        genreLabel.text = nil
+        descriptionLabel.text = nil
+        subscribeButton.isEnabled = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let podcast = podcast {
             updateUI(for: podcast)
+        } else {
+            clearUI()
         }
     }
     
     private func updateUI(for podcast: Podcast) {
+        subscribeButton.isEnabled = true
+        
         //Fetch the image
         //Ensure we have a url to use:
         guard let url = podcast.artworkURL else {

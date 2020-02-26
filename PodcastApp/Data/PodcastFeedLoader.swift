@@ -36,10 +36,6 @@ class PodcastFeedLoader {
                 DispatchQueue.main.async {
                     completion(.failure(.notFound))
                 }
-            case 500...599:
-                DispatchQueue.main.async {
-                    completion(.failure(.serverError(httpResponse.statusCode)))
-                }
             default:
                 DispatchQueue.main.async {
                     completion(.failure(.requestFailed(httpResponse.statusCode)))
@@ -84,13 +80,13 @@ class PodcastFeedLoader {
     
     private func convert(atom: AtomFeed) throws -> Podcast {
         guard let name = atom.title else {
-            throw PodcastLoadingError.missingAttribute("title")
+            throw PodcastLoadingError.feedMissingData("title")
         }
         
         let author = atom.authors?.compactMap({ $0.name }).joined(separator: ", ") ?? ""
         
         guard let logoURL = atom.logo.flatMap(URL.init) else {
-            throw PodcastLoadingError.missingAttribute("logo")
+            throw PodcastLoadingError.feedMissingData("logo")
         }
         
         let description = atom.subtitle?.value ?? ""
@@ -107,15 +103,15 @@ class PodcastFeedLoader {
     
     private func convert(rss: RSSFeed) throws -> Podcast {
         guard let title = rss.title else {
-            throw PodcastLoadingError.missingAttribute("title")
+            throw PodcastLoadingError.feedMissingData("title")
         }
         
         guard let author = rss.iTunes?.iTunesOwner?.name else {
-            throw PodcastLoadingError.missingAttribute("itunes:owner name")
+            throw PodcastLoadingError.feedMissingData("itunes:owner name")
         }
         
         guard let logoURL = rss.iTunes?.iTunesImage?.attributes?.href.flatMap(URL.init) else {
-            throw PodcastLoadingError.missingAttribute("itunes:image url")
+            throw PodcastLoadingError.feedMissingData("itunes:image url")
         }
         
         let description = rss.description ?? ""
