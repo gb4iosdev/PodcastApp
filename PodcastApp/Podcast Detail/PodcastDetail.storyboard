@@ -23,13 +23,49 @@
                             </connections>
                         </containerView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8DP-uX-Juj">
-                                <rect key="frame" x="0.0" y="608" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodeCell" rowHeight="97" id="8DP-uX-Juj" customClass="EpisodeCell" customModule="PodcastApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="608" width="414" height="97"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8DP-uX-Juj" id="tVu-nO-3au">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="97"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="uSt-Wv-VSE">
+                                            <rect key="frame" x="20" y="11" width="374" height="75"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zH-yC-v4P">
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:42:28 • May 3rd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki2-Vo-cO5">
+                                                    <rect key="frame" x="0.0" y="23.5" width="374" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQN-4N-CFQ">
+                                                    <rect key="frame" x="0.0" y="44.5" width="374" height="30.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uSt-Wv-VSE" firstAttribute="leading" secondItem="tVu-nO-3au" secondAttribute="leadingMargin" id="4uC-VC-D2s"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="uSt-Wv-VSE" secondAttribute="trailing" id="Mkb-QV-PP5"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="uSt-Wv-VSE" secondAttribute="bottom" id="XWS-oA-cfl"/>
+                                        <constraint firstItem="uSt-Wv-VSE" firstAttribute="top" secondItem="tVu-nO-3au" secondAttribute="topMargin" id="juc-97-8Yj"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="GQN-4N-CFQ" id="ABX-nG-iVi"/>
+                                    <outlet property="infoLabel" destination="ki2-Vo-cO5" id="Ow7-7J-aoM"/>
+                                    <outlet property="titleLabel" destination="1zH-yC-v4P" id="AAD-3u-8sS"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -58,13 +94,13 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptl-5z-2c4" customClass="GradientBackgroundView" customModule="PodcastApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="184.5" width="414" height="259.5"/>
+                                <rect key="frame" x="0.0" y="188.5" width="414" height="255.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LZi-3e-1E4">
-                                        <rect key="frame" x="8" y="188" width="398" height="53.5"/>
+                                        <rect key="frame" x="8" y="188" width="398" height="49.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tP6-9A-S0R" userLabel="Labels VStack">
-                                                <rect key="frame" x="0.0" y="0.0" width="228" height="53.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="316" height="49.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Podcast Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iID-go-xit">
                                                         <rect key="frame" x="0.0" y="0.0" width="97.5" height="12"/>
@@ -82,7 +118,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxF-KQ-Tnz" customClass="GenreLabel" customModule="PodcastApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="35" width="47" height="18.5"/>
+                                                        <rect key="frame" x="0.0" y="35" width="35" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                         <color key="textColor" red="0.30403999999999998" green="0.30359999999999998" blue="0.33000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -98,7 +134,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgT-aY-b2H" customClass="SubscribeButton" customModule="PodcastApp" customModuleProvider="target">
-                                                <rect key="frame" x="228" y="4" width="170" height="46"/>
+                                                <rect key="frame" x="316" y="10" width="82" height="30"/>
                                                 <state key="normal" title="SUBSCRIBE"/>
                                             </button>
                                         </subviews>

@@ -24,6 +24,9 @@ class PodcastDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.backgroundColor = Theme.Colours.grey5
+        tableView.separatorColor = Theme.Colours.grey3
+        
         headerViewController = children.compactMap { $0 as? PodcastDetailHeaderViewController }.first
         loadPodcast()
     }
@@ -57,5 +60,24 @@ class PodcastDetailViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+    }
+}
+
+//MARK: - UITableViewDataSource methods
+
+extension PodcastDetailViewController {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return podcast.episodes.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: EpisodeCell = tableView.dequeue(for: indexPath)
+        
+        cell.titleLabel.text = "Episode Title"
+        cell.infoLabel.text = "01:42:28 • May 3rd"
+        cell.descriptionLabel.text = "This is a description of the episode and it is quite long."
+
+        return cell
     }
 }

@@ -98,6 +98,16 @@ class PodcastFeedLoader {
         podcast.description = description
         podcast.primaryGenre = atom.categories?.first?.attributes?.label
         
+        podcast.episodes = (atom.entries ?? []).map { entry in
+            let episode = Episode()
+            episode.identifier = entry.id
+            episode.title = entry.title
+            episode.description = entry.summary?.value
+            episode.enclosureURL = entry.content?.value.flatMap(URL.init)
+            
+            return episode
+        }
+        
         return podcast
     }
     
@@ -106,8 +116,8 @@ class PodcastFeedLoader {
             throw PodcastLoadingError.feedMissingData("title")
         }
         
-        guard let author = rss.iTunes?.iTunesOwner?.name else {
-            throw PodcastLoadingError.feedMissingData("itunes:owner name")
+        guard let author = rss.iTunes?.iTunesAuthor ?? rss.iTunes?.iTunesOwner?.name else {
+            throw PodcastLoadingError.feedMissingData("itunes:author, itunes:owner name")
         }
         
         guard let logoURL = rss.iTunes?.iTunesImage?.attributes?.href.flatMap(URL.init) else {
@@ -122,6 +132,16 @@ class PodcastFeedLoader {
         podcast.artworkURL = logoURL
         podcast.description = description
         podcast.primaryGenre = rss.categories?.first?.value ?? rss.iTunes?.iTunesCategories?.first?.attributes?.text
+        podcast.episodes = (rss.items ?? []).map { item in
+            let episode = Episode()
+            episode.identifier = item.guid?.value
+            episode.title = item.title
+            episode.description = item.description
+            episode.publicationDate = item.pubDate
+            episode.duration = item.iTunes?.iTunesDuration
+            episode.enclosureURL = item.enclosure?.attributes?.url.flatMap(URL.init)
+            return episode
+        }
         
         return podcast
     }

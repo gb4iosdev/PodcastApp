@@ -20,7 +20,7 @@ enum PodcastLoadingError: Error {
         switch self {
         case .feedMissingData(let key): return "Feed is missing data for key: \(key)"
         case .networkingError(let error): return "Network error fetching podcast: \(error.localizedDescription)"
-        case .feedParsingError: return "Feed Parsking Error"
+        case .feedParsingError: return "Feed Parsing Error"
         case .notFound: return "Feed not found"
         case .requestFailed(let status): return "HTTP \(status) returned while fetching feed"
         case .unknownDataFormat: return "Found an unexpected data format in the feed"

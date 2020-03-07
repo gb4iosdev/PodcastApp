@@ -14,4 +14,5 @@ class Podcast {
     var description: String?
     var primaryGenre: String?
     var artworkURL: URL?
+    var episodes: [Episode] = []
 }

@@ -11,8 +11,8 @@ import UIKit
 class SearchViewController: UITableViewController, UISearchResultsUpdating {
     
     var recommendedPodcasts: [SearchResult] = []
+    var results: [SearchResult] = []
     
-    private var results: [SearchResult] = []
     private let dataManager = PodCastDataManager()
 
     override func viewDidLoad() {
@@ -23,10 +23,10 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
         tableView.separatorInset = .zero
         
         let search = UISearchController(searchResultsController: nil)
+        search.obscuresBackgroundDuringPresentation = false
+        //search.hidesNavigationBarDuringPresentation = false
         search.searchResultsUpdater = self
         navigationItem.searchController = search
-        navigationItem.hidesSearchBarWhenScrolling = true
-        navigationItem.searchController!.searchBar.backgroundColor = .black
         
         loadRecommendedPodcasts()
     }
@@ -69,18 +69,23 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     
     private func resetToRecommendedPodcasts() {
         results = recommendedPodcasts
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return results.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SearchResultCell = tableView.dequeue(for: indexPath)
         let result = results[indexPath.row]
