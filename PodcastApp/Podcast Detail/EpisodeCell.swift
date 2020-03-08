@@ -23,4 +23,10 @@ class EpisodeCell: UITableViewCell {
         infoLabel.textColor = Theme.Colours.grey2
         descriptionLabel.textColor = Theme.Colours.grey2
     }
+    
+    func configure(with viewModel: EpisodeCellViewModel) {
+        titleLabel.text = viewModel.title
+        infoLabel.text = viewModel.info
+        descriptionLabel.text = viewModel.description
+    }
 }

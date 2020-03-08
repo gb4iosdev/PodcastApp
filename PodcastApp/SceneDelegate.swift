@@ -23,6 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         Theme.apply(to: window)
         
+        //Persistence
+        SubscriptionStore.shared.initializeModel()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

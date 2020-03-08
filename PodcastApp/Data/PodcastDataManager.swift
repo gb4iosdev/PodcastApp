@@ -42,4 +42,22 @@ class PodCastDataManager {
             completion(result)
         }
     }
+    
+    func lookupInfo(for searchResult: SearchResult, completion: @escaping (Result<PodcastLookupInfo?, APIError>) -> Void) {
+        if let feed = searchResult.feedURL {
+            let lookup = PodcastLookupInfo(id: searchResult.id, feedURL: feed)
+            completion(.success(lookup))
+        } else {
+            searchClient.lookup(id: searchResult.id) { result in
+                switch result {
+                case .success(let updatedResult):
+                    let lookupInfo = updatedResult?.feedURL.flatMap({ PodcastLookupInfo(id: searchResult.id, feedURL: $0) })
+                    completion(.success(lookupInfo))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+                
+            }
+        }
+    }
 }

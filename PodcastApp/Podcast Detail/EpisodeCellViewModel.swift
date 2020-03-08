@@ -18,8 +18,14 @@ struct EpisodeCellViewModel {
         return formatter
     }()
     
+    private static let timeFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .short
+        formatter.allowedUnits = [.hour, .minute, .second]
+        return formatter
+    }()
+    
     init(episode: Episode) {
-        
         self.episode = episode
     }
     
@@ -28,7 +34,9 @@ struct EpisodeCellViewModel {
     }
     
     var description: String? {
-        return episode.description
+        return episode.description?
+            .strippingHTML()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     var info: String {
@@ -37,10 +45,12 @@ struct EpisodeCellViewModel {
     }
     
     private var timeString: String? {
-        return "000"
+        guard let duration = episode.duration else { return nil }
+        return EpisodeCellViewModel.timeFormatter.string(from: duration)
     }
     
     private var dateString: String? {
-        return "xxxxx"
+        guard let publicationDate = episode.publicationDate else { return nil }
+        return EpisodeCellViewModel.dateFormatter.string(from: publicationDate)
     }
 }

@@ -96,37 +96,30 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let result = results[indexPath.row]
+        let searchResult = results[indexPath.row]
         
-            if let feed = result.feedURL {
-                DispatchQueue.main.async {
-                    self.showPodcast(with: feed)
-                    tableView.deselectRow(at: indexPath, animated: true)
-                }
-            } else {
-                self.dataManager.lookup(podcastID: result.id) { result in
-                    switch result {
-                    case .success(let podcast):
-                        if let feed = podcast?.feedURL {
-                            DispatchQueue.main.async {
-                                self.showPodcast(with: feed)
-                            }
-                        } else {
-                            print("Podcast not found")
-                        }
-                    case .failure(let error):
-                        print("Error loading podcast: \(error.localizedDescription)")
-                    }
+        dataManager.lookupInfo(for: searchResult) { result in
+            switch result {
+            case .success(let lookupInfo):
+                if let lookupInfo = lookupInfo {
                     DispatchQueue.main.async {
-                        tableView.deselectRow(at: indexPath, animated: true)
+                        self.showPodcast(with: lookupInfo)
                     }
+                } else {
+                    print("Podcast not found")
                 }
+            case .failure(let error):
+                print("Error loading podcast: \(error.localizedDescription)")
             }
+            DispatchQueue.main.async {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
     }
     
-    private func showPodcast(with feedURL: URL) {
+    private func showPodcast(with lookupInfo: PodcastLookupInfo) {
         let detailVC = UIStoryboard(name: "PodcastDetail", bundle: nil).instantiateInitialViewController() as! PodcastDetailViewController
-        detailVC.feedURL = feedURL
+        detailVC.podcastLookupInfo = lookupInfo
         show(detailVC, sender: self)
     }
 

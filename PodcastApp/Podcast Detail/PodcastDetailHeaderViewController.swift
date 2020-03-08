@@ -17,10 +17,13 @@ class PodcastDetailHeaderViewController: UIViewController {
     @IBOutlet weak var subscribeButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var podcast: Podcast? {
+    var podcast: PodcastViewModel? {
         didSet {
             if isViewLoaded, let podcast = podcast {
-                updateUI(for: podcast)
+                UIView.animate(withDuration: 0.4) {
+                    self.updateUI(for: podcast)
+                    self.view.layoutIfNeeded()
+                }
             }
         }
     }
@@ -46,8 +49,9 @@ class PodcastDetailHeaderViewController: UIViewController {
         }
     }
     
-    private func updateUI(for podcast: Podcast) {
+    private func updateUI(for podcast: PodcastViewModel) {
         subscribeButton.isEnabled = true
+        subscribeButton.isSelected = podcast.isSubscribed
         
         //Fetch the image
         //Ensure we have a url to use:
@@ -72,8 +76,10 @@ class PodcastDetailHeaderViewController: UIViewController {
         
         titleLabel.text = podcast.title
         authorLabel.text = podcast.author
-        genreLabel.text = podcast.primaryGenre
-        descriptionLabel.text = podcast.description
+        genreLabel.text = podcast.genre
+        descriptionLabel.text = podcast.description?
+            .strippingHTML()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
 }

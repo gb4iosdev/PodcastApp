@@ -31,6 +31,15 @@
 		8683B81823FB0C1200F12D2F /* JSONAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8683B81723FB0C1200F12D2F /* JSONAPI.swift */; };
 		8683B81A23FB0D2500F12D2F /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8683B81923FB0D2500F12D2F /* ImageAPI.swift */; };
 		8683B81C23FB1A1E00F12D2F /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8683B81B23FB1A1E00F12D2F /* GradientBackgroundView.swift */; };
+		8694A7AA241541D90059554A /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7A9241541D90059554A /* String+HTML.swift */; };
+		8694A7AC241550980059554A /* PodcastLookupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7AB241550980059554A /* PodcastLookupInfo.swift */; };
+		8694A7B0241558C80059554A /* Subscriptions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7AE241558C80059554A /* Subscriptions.xcdatamodeld */; };
+		8694A7B6241568A20059554A /* SubscriptionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7B2241568A10059554A /* SubscriptionEntity+CoreDataClass.swift */; };
+		8694A7B7241568A20059554A /* PodcastEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7B3241568A20059554A /* PodcastEntity+CoreDataClass.swift */; };
+		8694A7B8241568A20059554A /* SubscriptionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7B4241568A20059554A /* SubscriptionEntity+CoreDataProperties.swift */; };
+		8694A7B9241568A20059554A /* PodcastEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7B5241568A20059554A /* PodcastEntity+CoreDataProperties.swift */; };
+		8694A7BB2415691F0059554A /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7BA2415691F0059554A /* SubscriptionStore.swift */; };
+		8694A7BD24157B640059554A /* PodcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7BC24157B640059554A /* PodcastViewModel.swift */; };
 		86A4B13D23E793EC001EA316 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A4B13C23E793EC001EA316 /* AppDelegate.swift */; };
 		86A4B13F23E793EC001EA316 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A4B13E23E793EC001EA316 /* SceneDelegate.swift */; };
 		86A4B14423E793EC001EA316 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86A4B14223E793EC001EA316 /* Main.storyboard */; };
@@ -89,6 +98,15 @@
 		8683B81723FB0C1200F12D2F /* JSONAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAPI.swift; sourceTree = "<group>"; };
 		8683B81923FB0D2500F12D2F /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 		8683B81B23FB1A1E00F12D2F /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		8694A7A9241541D90059554A /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
+		8694A7AB241550980059554A /* PodcastLookupInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastLookupInfo.swift; sourceTree = "<group>"; };
+		8694A7AF241558C80059554A /* Subscriptions.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Subscriptions.xcdatamodel; sourceTree = "<group>"; };
+		8694A7B2241568A10059554A /* SubscriptionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscriptionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8694A7B3241568A20059554A /* PodcastEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PodcastEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8694A7B4241568A20059554A /* SubscriptionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscriptionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8694A7B5241568A20059554A /* PodcastEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PodcastEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8694A7BA2415691F0059554A /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
+		8694A7BC24157B640059554A /* PodcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewModel.swift; sourceTree = "<group>"; };
 		86A4B13923E793EC001EA316 /* PodcastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A4B13C23E793EC001EA316 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86A4B13E23E793EC001EA316 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +180,7 @@
 				861895AD23E7B14000A8350D /* ReusableView.swift */,
 				861895AF23E7B20F00A8350D /* UITableView+ReusableView.swift */,
 				86B9759A2401CDED003846D6 /* UIImage+Colour.swift */,
+				8694A7A9241541D90059554A /* String+HTML.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -202,6 +221,27 @@
 			path = PodcastAppTests;
 			sourceTree = "<group>";
 		};
+		8694A7AD2415589C0059554A /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				8694A7B12415685D0059554A /* Entities */,
+				8694A7AE241558C80059554A /* Subscriptions.xcdatamodeld */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		8694A7B12415685D0059554A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				8694A7B3241568A20059554A /* PodcastEntity+CoreDataClass.swift */,
+				8694A7B5241568A20059554A /* PodcastEntity+CoreDataProperties.swift */,
+				8694A7B2241568A10059554A /* SubscriptionEntity+CoreDataClass.swift */,
+				8694A7B4241568A20059554A /* SubscriptionEntity+CoreDataProperties.swift */,
+				8694A7BA2415691F0059554A /* SubscriptionStore.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		86A4B13023E793EC001EA316 = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +265,7 @@
 		86A4B13B23E793EC001EA316 /* PodcastApp */ = {
 			isa = PBXGroup;
 			children = (
+				8694A7AD2415589C0059554A /* Stores */,
 				86AEB64923F9D961002E0393 /* Models */,
 				86AEB64823F9D93F002E0393 /* Data */,
 				8675B2D123F0E3EC00DE3B40 /* Network */,
@@ -257,6 +298,7 @@
 			children = (
 				86AEB64C23F9D97E002E0393 /* Podcast.swift */,
 				86198F3F24133519007792AB /* Episode.swift */,
+				8694A7AB241550980059554A /* PodcastLookupInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,6 +315,7 @@
 				86B975982401CAC9003846D6 /* SubscribeButton.swift */,
 				86198F3D24132EAA007792AB /* EpisodeCell.swift */,
 				86198F41241337BB007792AB /* EpisodeCellViewModel.swift */,
+				8694A7BC24157B640059554A /* PodcastViewModel.swift */,
 			);
 			path = "Podcast Detail";
 			sourceTree = "<group>";
@@ -466,14 +509,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C5FCCA23FA2C3300F9CEC5 /* SpinnerViewController.swift in Sources */,
+				8694A7BB2415691F0059554A /* SubscriptionStore.swift in Sources */,
+				8694A7AA241541D90059554A /* String+HTML.swift in Sources */,
+				8694A7B8241568A20059554A /* SubscriptionEntity+CoreDataProperties.swift in Sources */,
 				861895AB23E7B0C400A8350D /* SearchViewController.swift in Sources */,
 				8675B2D423F0E40600DE3B40 /* Endpoint.swift in Sources */,
 				86C5FCC823FA275400F9CEC5 /* PodcastDetailHeaderViewController.swift in Sources */,
+				8694A7AC241550980059554A /* PodcastLookupInfo.swift in Sources */,
 				86A4B15123E794F1001EA316 /* Theme.swift in Sources */,
 				8675B2D623F0E43800DE3B40 /* ParameterKey.swift in Sources */,
 				861895B023E7B20F00A8350D /* UITableView+ReusableView.swift in Sources */,
 				8675B2DA23F0E46700DE3B40 /* EndpointExamples.swift in Sources */,
 				8683423623FE12EF0054FF75 /* GenreLabel.swift in Sources */,
+				8694A7BD24157B640059554A /* PodcastViewModel.swift in Sources */,
 				86A4B13D23E793EC001EA316 /* AppDelegate.swift in Sources */,
 				86B9759B2401CDED003846D6 /* UIImage+Colour.swift in Sources */,
 				8683B81C23FB1A1E00F12D2F /* GradientBackgroundView.swift in Sources */,
@@ -483,7 +531,9 @@
 				86198F42241337BB007792AB /* EpisodeCellViewModel.swift in Sources */,
 				8683B81823FB0C1200F12D2F /* JSONAPI.swift in Sources */,
 				86B975992401CAC9003846D6 /* SubscribeButton.swift in Sources */,
+				8694A7B6241568A20059554A /* SubscriptionEntity+CoreDataClass.swift in Sources */,
 				86198F4024133519007792AB /* Episode.swift in Sources */,
+				8694A7B9241568A20059554A /* PodcastEntity+CoreDataProperties.swift in Sources */,
 				86198F3E24132EAA007792AB /* EpisodeCell.swift in Sources */,
 				86AEB64B23F9D970002E0393 /* PodcastFeedLoader.swift in Sources */,
 				863C369823F22BD800591E09 /* APIError.swift in Sources */,
@@ -493,7 +543,9 @@
 				86AEB64F23F9DB6B002E0393 /* PodcastLoadingError.swift in Sources */,
 				861895A923E7AFD900A8350D /* SearchResultCell.swift in Sources */,
 				86A4B13F23E793EC001EA316 /* SceneDelegate.swift in Sources */,
+				8694A7B0241558C80059554A /* Subscriptions.xcdatamodeld in Sources */,
 				86AEB64D23F9D97E002E0393 /* Podcast.swift in Sources */,
+				8694A7B7241568A20059554A /* PodcastEntity+CoreDataClass.swift in Sources */,
 				8675B2D823F0E45200DE3B40 /* PodcastEndpoint.swift in Sources */,
 				8637987B23E8392A00B7C82D /* SearchResult.swift in Sources */,
 				8683B81A23FB0D2500F12D2F /* ImageAPI.swift in Sources */,
@@ -756,6 +808,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8694A7AE241558C80059554A /* Subscriptions.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8694A7AF241558C80059554A /* Subscriptions.xcdatamodel */,
+			);
+			currentVersion = 8694A7AF241558C80059554A /* Subscriptions.xcdatamodel */;
+			path = Subscriptions.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 86A4B13123E793EC001EA316 /* Project object */;
 }
