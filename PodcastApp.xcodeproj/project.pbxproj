@@ -40,6 +40,8 @@
 		8694A7B9241568A20059554A /* PodcastEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7B5241568A20059554A /* PodcastEntity+CoreDataProperties.swift */; };
 		8694A7BB2415691F0059554A /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7BA2415691F0059554A /* SubscriptionStore.swift */; };
 		8694A7BD24157B640059554A /* PodcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694A7BC24157B640059554A /* PodcastViewModel.swift */; };
+		8697FB6024164C6900958A9A /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8697FB5F24164C6900958A9A /* Player.storyboard */; };
+		8697FB6224164CCE00958A9A /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8697FB6124164CCE00958A9A /* PlayerViewController.swift */; };
 		86A4B13D23E793EC001EA316 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A4B13C23E793EC001EA316 /* AppDelegate.swift */; };
 		86A4B13F23E793EC001EA316 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A4B13E23E793EC001EA316 /* SceneDelegate.swift */; };
 		86A4B14423E793EC001EA316 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86A4B14223E793EC001EA316 /* Main.storyboard */; };
@@ -107,6 +109,8 @@
 		8694A7B5241568A20059554A /* PodcastEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PodcastEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8694A7BA2415691F0059554A /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
 		8694A7BC24157B640059554A /* PodcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewModel.swift; sourceTree = "<group>"; };
+		8697FB5F24164C6900958A9A /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
+		8697FB6124164CCE00958A9A /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		86A4B13923E793EC001EA316 /* PodcastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A4B13C23E793EC001EA316 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86A4B13E23E793EC001EA316 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +246,15 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		8697FB5E24164C4600958A9A /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				8697FB5F24164C6900958A9A /* Player.storyboard */,
+				8697FB6124164CCE00958A9A /* PlayerViewController.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		86A4B13023E793EC001EA316 = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +284,7 @@
 				8675B2D123F0E3EC00DE3B40 /* Network */,
 				861895AC23E7B10700A8350D /* Utility */,
 				86C5FCC223FA1DCE00F9CEC5 /* Podcast Detail */,
+				8697FB5E24164C4600958A9A /* Player */,
 				861895A523E7AC8C00A8350D /* Search */,
 				86A4B13C23E793EC001EA316 /* AppDelegate.swift */,
 				86A4B13E23E793EC001EA316 /* SceneDelegate.swift */,
@@ -425,6 +439,7 @@
 				86C5FCC423FA1E0200F9CEC5 /* PodcastDetail.storyboard in Resources */,
 				861895A723E7ACE500A8350D /* Search.storyboard in Resources */,
 				86A4B14423E793EC001EA316 /* Main.storyboard in Resources */,
+				8697FB6024164C6900958A9A /* Player.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +538,7 @@
 				8683423623FE12EF0054FF75 /* GenreLabel.swift in Sources */,
 				8694A7BD24157B640059554A /* PodcastViewModel.swift in Sources */,
 				86A4B13D23E793EC001EA316 /* AppDelegate.swift in Sources */,
+				8697FB6224164CCE00958A9A /* PlayerViewController.swift in Sources */,
 				86B9759B2401CDED003846D6 /* UIImage+Colour.swift in Sources */,
 				8683B81C23FB1A1E00F12D2F /* GradientBackgroundView.swift in Sources */,
 				868326BF240355BB004CF362 /* PodcastDataManager.swift in Sources */,
