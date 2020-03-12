@@ -96,6 +96,20 @@ extension PodcastDetailViewController {
     }
 }
 
+//MARK: - UITableViewDelegate methods
+
+extension PodcastDetailViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let podcast = podcast else { return }
+        let episode = podcast.episodes[indexPath.row]
+        
+        let player = PlayerViewController.shared
+        player.setEpisode(episode, podcast: podcast)
+        present(player, animated: true, completion: nil)
+    }
+}
+
 
 //MARK: - Scrolling
 extension PodcastDetailViewController {

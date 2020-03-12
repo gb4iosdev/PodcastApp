@@ -70,27 +70,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ns-HT-Q71" userLabel="skipBack">
-                                <rect key="frame" x="95" y="618.5" width="20" height="24"/>
-                                <state key="normal" image="icon-skip-back"/>
+                                <rect key="frame" x="63" y="625.5" width="40" height="48"/>
+                                <state key="normal" image="skip-back-large"/>
                                 <connections>
                                     <action selector="skipBack:" destination="KH7-jm-RRM" eventType="touchUpInside" id="92a-3j-Qh7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngt-4K-Pgw" userLabel="PlayPause">
-                                <rect key="frame" x="195" y="611.5" width="24" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngt-4K-Pgw" userLabel="PlayPause">
+                                <rect key="frame" x="183" y="611.5" width="48" height="76"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="bx6-kC-NsJ"/>
-                                    <constraint firstAttribute="width" constant="24" id="cIg-QD-9cX"/>
+                                    <constraint firstAttribute="height" constant="76" id="bx6-kC-NsJ"/>
+                                    <constraint firstAttribute="width" constant="48" id="cIg-QD-9cX"/>
                                 </constraints>
-                                <state key="normal" image="Play"/>
-                                <state key="selected" image="Pause"/>
+                                <state key="normal" image="Play-large"/>
+                                <state key="selected" image="Pause-large"/>
                                 <connections>
                                     <action selector="playPause:" destination="KH7-jm-RRM" eventType="touchUpInside" id="Qo9-M4-VoZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dda-m7-bdc" userLabel="skipForward">
-                                <rect key="frame" x="299" y="618.5" width="20" height="24"/>
-                                <state key="normal" image="icon-skip-forward"/>
+                                <rect key="frame" x="306" y="625.5" width="40" height="48"/>
+                                <state key="normal" image="skip-forward-large"/>
                                 <connections>
                                     <action selector="skipForward:" destination="KH7-jm-RRM" eventType="touchUpInside" id="Nv3-Ju-1HH"/>
                                 </connections>
@@ -99,7 +99,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6US-WO-bEg" firstAttribute="centerX" secondItem="xgu-Zd-ggw" secondAttribute="centerX" id="69s-dt-DId"/>
-                            <constraint firstItem="dda-m7-bdc" firstAttribute="leading" secondItem="Ngt-4K-Pgw" secondAttribute="trailing" constant="80" id="9ev-Rr-V5M"/>
+                            <constraint firstItem="dda-m7-bdc" firstAttribute="leading" secondItem="Ngt-4K-Pgw" secondAttribute="trailing" constant="75" id="9ev-Rr-V5M"/>
                             <constraint firstItem="Ngt-4K-Pgw" firstAttribute="top" secondItem="MhQ-Oo-g1Z" secondAttribute="bottom" constant="80" id="AH2-z1-geb"/>
                             <constraint firstItem="t4q-rA-etQ" firstAttribute="leading" secondItem="xgu-Zd-ggw" secondAttribute="leading" constant="40" id="AMJ-sM-jrZ"/>
                             <constraint firstItem="Tpm-1X-WOB" firstAttribute="centerX" secondItem="xgu-Zd-ggw" secondAttribute="centerX" id="Br1-pP-JAe"/>
@@ -137,10 +137,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Pause" width="16" height="30.5"/>
-        <image name="Play" width="24" height="38"/>
+        <image name="Pause-large" width="32" height="60"/>
+        <image name="Play-large" width="48" height="76"/>
         <image name="icon-chevron-down" width="45" height="24"/>
-        <image name="icon-skip-back" width="20" height="24"/>
-        <image name="icon-skip-forward" width="20" height="24"/>
+        <image name="skip-back-large" width="40" height="48"/>
+        <image name="skip-forward-large" width="40" height="48"/>
     </resources>
 </document>
