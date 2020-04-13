@@ -17,4 +17,16 @@ extension UIImage {
             context.fill(CGRect(origin: .zero, size: size))
         }
     }
+    
+    func tint(colour: UIColor) -> UIImage {
+        let maskImage = cgImage
+        let bounds = CGRect(origin: .zero, size: size)
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { context in
+            let cgContext = context.cgContext
+            cgContext.clip(to: bounds, mask: maskImage!)
+            colour.setFill()
+            cgContext.fill(bounds)
+        }
+    }
 }

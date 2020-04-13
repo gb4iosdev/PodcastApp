@@ -28,6 +28,10 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var timeRemainingLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     
+    @IBOutlet var playerBar: PlayerBar!
+    
+    weak var presentationRootController: UIViewController?   //Where we present this PlayerViewController from.
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -41,6 +45,8 @@ class PlayerViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.playerBar.isHidden = true
 
         view.backgroundColor = Theme.Colours.grey4
         
@@ -66,9 +72,9 @@ class PlayerViewController: UIViewController {
         transportSlider.isEnabled = false
         
         let pauseImage = playPauseButton.image(for: .selected)
-        //TODO:  tint/dim this image using coregraphics
-        playPauseButton.setImage(pauseImage, for: [.selected, .highlighted])
-    
+        let tintedImage = pauseImage?.tint(colour: Theme.Colours.purpleDimmed)
+        playPauseButton.setImage(tintedImage, for: [.selected, .highlighted])
+        playerBar.playPauseButton.setImage(tintedImage, for: [.selected, .highlighted])
     }
     
     func setEpisode(_ episode: Episode, podcast: Podcast) {
@@ -79,24 +85,11 @@ class PlayerViewController: UIViewController {
             return
         }
         
-        imageAPI.fetchImage(at: url) { result in
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self.artworkImageView.alpha = 0
-                    self.artworkImageView.image = image
-                    UIView.animate(withDuration: 0.3) {
-                        self.artworkImageView.alpha = 1.0
-                    }
-                }
-            case .failure(let err):
-                switch err {
-                case .timeOut:
-                    return
-                default:
-                    print("Error fetching Image for cell: \(err.localizedDescription)")
-                }
-            }
+        fetchImage(at: url, for: artworkImageView)
+        fetchImage(at: url, for: playerBar.imageView)   //Should use the cache for this.
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.playerBar.isHidden = false
         }
         
         //Setup Audio Session:
@@ -119,7 +112,7 @@ class PlayerViewController: UIViewController {
         guard let audioURL = episode.enclosureURL else { return }
         let player = AVPlayer(url: audioURL)
         player.play()   //Delay here - Will start playing when enough of the song is buffered
-        playPauseButton.isSelected = true
+        togglePlayPauseButton(isPlaying: true)
         
         self.player = player
         
@@ -207,12 +200,49 @@ class PlayerViewController: UIViewController {
     @IBAction func playPause(_ sender: UIButton) {
         
         let wasPlaying = playPauseButton.isSelected
-        playPauseButton.isSelected.toggle()
+        togglePlayPauseButton(isPlaying: !wasPlaying)
         
         if wasPlaying {
             player?.pause()
         } else {
             player?.play()
         }
+    }
+    
+    private func togglePlayPauseButton(isPlaying: Bool) {
+        playPauseButton.isSelected = isPlaying
+        playerBar.playPauseButton.isSelected = isPlaying
+    }
+    
+    @IBAction func presentPlayer() {
+        //Needs a view controller to call, as the playerVC can be presented from anywhere in the application.
+        presentationRootController?.present(PlayerViewController.shared, animated: true, completion: nil)
+    }
+}
+
+//MARK: - Helpers
+extension PlayerViewController {
+    
+    func fetchImage(at url: URL, for imageView: UIImageView) {
+        imageAPI.fetchImage(at: url) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    imageView.alpha = 0
+                    imageView.image = image
+                    UIView.animate(withDuration: 0.3) {
+                        imageView.alpha = 1.0
+                    }
+                }
+            case .failure(let err):
+                switch err {
+                case .timeOut:
+                    return
+                default:
+                    print("Error fetching Image for cell: \(err.localizedDescription)")
+                }
+            }
+        }
+
     }
 }

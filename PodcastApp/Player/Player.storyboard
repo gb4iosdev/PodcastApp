@@ -125,6 +125,7 @@
                         <outlet property="artworkImageView" destination="G69-L4-VbD" id="rwq-W9-YjY"/>
                         <outlet property="artworkShadowWrapper" destination="6US-WO-bEg" id="3OM-UW-bgy"/>
                         <outlet property="playPauseButton" destination="Ngt-4K-Pgw" id="cps-bw-fmM"/>
+                        <outlet property="playerBar" destination="qYY-7p-1fJ" id="fFi-C7-Ir8"/>
                         <outlet property="timeProgressedLabel" destination="YEw-fG-ptr" id="lGj-BS-k9C"/>
                         <outlet property="timeRemainingLabel" destination="3Sq-Oj-rHo" id="hkq-iq-riv"/>
                         <outlet property="titleLabel" destination="Tpm-1X-WOB" id="5Zg-0I-sqU"/>
@@ -132,6 +133,103 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxf-xM-d96" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="qYY-7p-1fJ" customClass="PlayerBar" customModule="PodcastApp" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="equalCentering" alignment="center" spacing="76" translatesAutoresizingMaskIntoConstraints="NO" id="DpW-kz-9Dk">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xj8-t2-4HE" userLabel="Open Player">
+                                    <rect key="frame" x="8" y="24" width="25" height="12"/>
+                                    <accessibility key="accessibilityConfiguration" label="Open Player"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="12" id="fxv-YW-YKM"/>
+                                        <constraint firstAttribute="width" constant="25" id="oV1-OT-yRA"/>
+                                    </constraints>
+                                    <state key="normal" image="icon-chevron-up"/>
+                                    <connections>
+                                        <action selector="presentPlayer" destination="KH7-jm-RRM" eventType="touchUpInside" id="aA9-px-OlJ"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tb-ux-FQy" userLabel="PlayerBarCentreControls">
+                                    <rect key="frame" x="117.5" y="0.0" width="158" height="60"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djw-h9-aK8" userLabel="skipBack">
+                                            <rect key="frame" x="0.0" y="16" width="24" height="28"/>
+                                            <accessibility key="accessibilityConfiguration" label="Skip Back"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="6xm-8l-Exp"/>
+                                                <constraint firstAttribute="height" constant="28" id="7R2-Uy-Cdo"/>
+                                            </constraints>
+                                            <state key="normal" image="skip-back-large"/>
+                                            <connections>
+                                                <action selector="skipBack:" destination="KH7-jm-RRM" eventType="touchUpInside" id="nUg-WH-hO2"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sk6-m2-bkA" userLabel="PlayPause">
+                                            <rect key="frame" x="64" y="11" width="30" height="38"/>
+                                            <accessibility key="accessibilityConfiguration" label="Play"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="38" id="PxY-bk-iof"/>
+                                                <constraint firstAttribute="height" constant="38" id="snB-Nc-opP"/>
+                                                <constraint firstAttribute="width" constant="30" id="stX-X2-hyP"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="uLc-GR-Jsh"/>
+                                            </constraints>
+                                            <state key="normal" image="Play-large"/>
+                                            <state key="selected" image="Pause-large"/>
+                                            <connections>
+                                                <action selector="playPause:" destination="KH7-jm-RRM" eventType="touchUpInside" id="Ksy-Yy-u9b"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BA0-ad-WY3" userLabel="skipForward">
+                                            <rect key="frame" x="134" y="16" width="24" height="28"/>
+                                            <accessibility key="accessibilityConfiguration" label="Skip Forward"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="1xV-VU-JfA"/>
+                                                <constraint firstAttribute="height" constant="28" id="yjX-sV-1iL"/>
+                                            </constraints>
+                                            <state key="normal" image="skip-forward-large"/>
+                                            <connections>
+                                                <action selector="skipForward:" destination="KH7-jm-RRM" eventType="touchUpInside" id="U5h-Ak-EvF"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstItem="BA0-ad-WY3" firstAttribute="leading" secondItem="sk6-m2-bkA" secondAttribute="trailing" constant="40" id="3QE-fN-alS"/>
+                                        <constraint firstAttribute="trailing" secondItem="BA0-ad-WY3" secondAttribute="trailing" id="DsQ-hZ-NZ0"/>
+                                        <constraint firstItem="sk6-m2-bkA" firstAttribute="leading" secondItem="djw-h9-aK8" secondAttribute="trailing" constant="40" id="M5n-VW-na1"/>
+                                        <constraint firstItem="sk6-m2-bkA" firstAttribute="centerY" secondItem="9tb-ux-FQy" secondAttribute="centerY" id="PCK-1i-uxD"/>
+                                        <constraint firstItem="djw-h9-aK8" firstAttribute="centerY" secondItem="9tb-ux-FQy" secondAttribute="centerY" id="Ssn-9i-yoi"/>
+                                        <constraint firstItem="djw-h9-aK8" firstAttribute="leading" secondItem="9tb-ux-FQy" secondAttribute="leading" id="dqU-4f-MM5"/>
+                                        <constraint firstItem="BA0-ad-WY3" firstAttribute="centerY" secondItem="9tb-ux-FQy" secondAttribute="centerY" id="yK7-VX-lVG"/>
+                                    </constraints>
+                                </view>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XKb-me-iuM">
+                                    <rect key="frame" x="352" y="10" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="DDL-sU-zx5"/>
+                                        <constraint firstAttribute="height" constant="40" id="abI-1B-Obp"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="8" bottom="0.0" trailing="8"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="DpW-kz-9Dk" firstAttribute="top" secondItem="qYY-7p-1fJ" secondAttribute="top" id="4sy-Rc-5kO"/>
+                        <constraint firstItem="dDP-lB-PNo" firstAttribute="trailing" secondItem="DpW-kz-9Dk" secondAttribute="trailing" id="Wy5-OZ-Ypy"/>
+                        <constraint firstItem="DpW-kz-9Dk" firstAttribute="leading" secondItem="dDP-lB-PNo" secondAttribute="leading" id="YbJ-mx-QAl"/>
+                        <constraint firstItem="DpW-kz-9Dk" firstAttribute="bottom" secondItem="dDP-lB-PNo" secondAttribute="bottom" id="hZH-XN-09Z"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="dDP-lB-PNo"/>
+                    <connections>
+                        <outlet property="imageView" destination="XKb-me-iuM" id="Ybd-ee-Qj1"/>
+                        <outlet property="playPauseButton" destination="sk6-m2-bkA" id="qa7-DN-TtD"/>
+                    </connections>
+                </view>
             </objects>
             <point key="canvasLocation" x="-113.04347826086958" y="48.883928571428569"/>
         </scene>
@@ -140,6 +238,7 @@
         <image name="Pause-large" width="32" height="60"/>
         <image name="Play-large" width="48" height="76"/>
         <image name="icon-chevron-down" width="45" height="24"/>
+        <image name="icon-chevron-up" width="45" height="24"/>
         <image name="skip-back-large" width="40" height="48"/>
         <image name="skip-forward-large" width="40" height="48"/>
     </resources>
