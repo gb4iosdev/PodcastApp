@@ -56,7 +56,7 @@ extension PodcastSearchAPI {
 
     struct PodcastSearchResult: Decodable {
         let artistName: String
-        let collectionId: Int
+        let collectionId: Int       //This is the pdocast ID
         let collectionName: String
         let artworkUrl100: String
         let genreIds: [String]

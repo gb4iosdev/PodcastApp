@@ -14,5 +14,5 @@ class Episode {
     var description: String?
     var publicationDate: Date?
     var duration: TimeInterval?
-    var enclosureURL: URL?  //URL to the .mp3 sound file to download
+    var enclosureURL: URL?  //URL to the .mp3 sound file to download & play
 }

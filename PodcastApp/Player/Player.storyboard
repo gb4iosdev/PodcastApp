@@ -70,14 +70,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ns-HT-Q71" userLabel="skipBack">
-                                <rect key="frame" x="63" y="625.5" width="40" height="48"/>
+                                <rect key="frame" x="73" y="625.5" width="40" height="48"/>
                                 <state key="normal" image="skip-back-large"/>
                                 <connections>
                                     <action selector="skipBack:" destination="KH7-jm-RRM" eventType="touchUpInside" id="92a-3j-Qh7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngt-4K-Pgw" userLabel="PlayPause">
-                                <rect key="frame" x="183" y="611.5" width="48" height="76"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngt-4K-Pgw" userLabel="PlayPause">
+                                <rect key="frame" x="193" y="611.5" width="48" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="bx6-kC-NsJ"/>
                                     <constraint firstAttribute="width" constant="48" id="cIg-QD-9cX"/>
@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dda-m7-bdc" userLabel="skipForward">
-                                <rect key="frame" x="306" y="625.5" width="40" height="48"/>
+                                <rect key="frame" x="311" y="625.5" width="40" height="48"/>
                                 <state key="normal" image="skip-forward-large"/>
                                 <connections>
                                     <action selector="skipForward:" destination="KH7-jm-RRM" eventType="touchUpInside" id="Nv3-Ju-1HH"/>
@@ -99,7 +99,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6US-WO-bEg" firstAttribute="centerX" secondItem="xgu-Zd-ggw" secondAttribute="centerX" id="69s-dt-DId"/>
-                            <constraint firstItem="dda-m7-bdc" firstAttribute="leading" secondItem="Ngt-4K-Pgw" secondAttribute="trailing" constant="75" id="9ev-Rr-V5M"/>
+                            <constraint firstItem="dda-m7-bdc" firstAttribute="leading" secondItem="Ngt-4K-Pgw" secondAttribute="trailing" constant="70" id="9ev-Rr-V5M"/>
                             <constraint firstItem="Ngt-4K-Pgw" firstAttribute="top" secondItem="MhQ-Oo-g1Z" secondAttribute="bottom" constant="80" id="AH2-z1-geb"/>
                             <constraint firstItem="t4q-rA-etQ" firstAttribute="leading" secondItem="xgu-Zd-ggw" secondAttribute="leading" constant="40" id="AMJ-sM-jrZ"/>
                             <constraint firstItem="Tpm-1X-WOB" firstAttribute="centerX" secondItem="xgu-Zd-ggw" secondAttribute="centerX" id="Br1-pP-JAe"/>
@@ -113,7 +113,7 @@
                             <constraint firstItem="YEw-fG-ptr" firstAttribute="leading" secondItem="MhQ-Oo-g1Z" secondAttribute="leading" id="Wq6-5H-ERQ"/>
                             <constraint firstItem="dda-m7-bdc" firstAttribute="centerY" secondItem="Ngt-4K-Pgw" secondAttribute="centerY" id="X7K-I5-fL2"/>
                             <constraint firstItem="Tpm-1X-WOB" firstAttribute="centerY" secondItem="t4q-rA-etQ" secondAttribute="centerY" id="bhC-FM-DVR"/>
-                            <constraint firstItem="Ngt-4K-Pgw" firstAttribute="centerX" secondItem="xgu-Zd-ggw" secondAttribute="centerX" id="omb-xY-UQv"/>
+                            <constraint firstItem="Ngt-4K-Pgw" firstAttribute="centerX" secondItem="xgu-Zd-ggw" secondAttribute="centerX" constant="10" id="omb-xY-UQv"/>
                             <constraint firstItem="MhQ-Oo-g1Z" firstAttribute="top" secondItem="6US-WO-bEg" secondAttribute="bottom" constant="38" id="pQ0-Kh-xgC"/>
                             <constraint firstItem="xgu-Zd-ggw" firstAttribute="trailing" secondItem="MhQ-Oo-g1Z" secondAttribute="trailing" constant="20" id="sPE-iR-DOq"/>
                             <constraint firstItem="YEw-fG-ptr" firstAttribute="top" secondItem="MhQ-Oo-g1Z" secondAttribute="bottom" constant="13" id="x3d-CB-e65"/>

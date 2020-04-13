@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class PlayerViewController: UIViewController {
     
@@ -30,6 +32,11 @@ class PlayerViewController: UIViewController {
         return .lightContent
     }
     
+    private let imageAPI = ImageAPI()
+    
+    private var player: AVPlayer?
+    private var timeObservationToken: Any?
+    private var skipTime = CMTime(seconds: 10, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -56,17 +63,102 @@ class PlayerViewController: UIViewController {
         
         transportSlider.setThumbImage(UIImage(named: "Knob"), for: .normal)
         transportSlider.setThumbImage(UIImage(named: "Knob-Tracking"), for: .highlighted)
+        transportSlider.isEnabled = false
         
         let pauseImage = playPauseButton.image(for: .selected)
-        //TODO:  tint this image
+        //TODO:  tint/dim this image using coregraphics
         playPauseButton.setImage(pauseImage, for: [.selected, .highlighted])
     
     }
     
     func setEpisode(_ episode: Episode, podcast: Podcast) {
         titleLabel.text = episode.title
-        //Set the artworkImageView image here:  This is where Ben uses Kingfisher again.  Need to borrow code from other location, and look to modularize that code.   Fade in over 0.3 sec
         
+        //Retrieve Image:  Ensure we have a url to use:
+        guard let url = podcast.artworkURL else {
+            return
+        }
+        
+        imageAPI.fetchImage(at: url) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.artworkImageView.alpha = 0
+                    self.artworkImageView.image = image
+                    UIView.animate(withDuration: 0.3) {
+                        self.artworkImageView.alpha = 1.0
+                    }
+                }
+            case .failure(let err):
+                switch err {
+                case .timeOut:
+                    return
+                default:
+                    print("Error fetching Image for cell: \(err.localizedDescription)")
+                }
+            }
+        }
+        
+        //Setup Audio Session:
+        do {
+            try configureAudioSession()
+        } catch {
+            print("ERROR: \(error.localizedDescription)")
+            showAudioSessionError()
+        }
+        
+        //Stop any existing player from playing
+        if let player = player {
+            player.pause()
+            if let previousTimeObservation = timeObservationToken {
+                player.removeTimeObserver(previousTimeObservation)
+            }
+            self.player = nil
+        }
+        
+        guard let audioURL = episode.enclosureURL else { return }
+        let player = AVPlayer(url: audioURL)
+        player.play()   //Delay here - Will start playing when enough of the song is buffered
+        playPauseButton.isSelected = true
+        
+        self.player = player
+        
+        transportSlider.isEnabled = true
+        transportSlider.value = 0
+        
+        let interval = CMTime(seconds: 0.25, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        timeObservationToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+            self?.updateSlider(for: time)
+            
+            self?.timeProgressedLabel.text = time.formattedString
+            if let duration = player.currentItem?.duration {
+                let remaining = duration - time
+                self?.timeRemainingLabel.text = "-" + remaining.formattedString
+            } else {
+                self?.timeRemainingLabel.text = "--"
+            }
+        }
+    }
+    
+    private func updateSlider(for time: CMTime) {
+        //Need to ensure the user is not currently dragging the transportSlider, otherwise will be fighting against this:
+        guard !transportSlider.isTracking else { return }
+        guard let duration = player?.currentItem?.duration else { return }
+        let progress = time.seconds / duration.seconds
+        transportSlider.value = Float(progress)
+    }
+    
+    private func configureAudioSession() throws {
+        let session = AVAudioSession.sharedInstance()
+        try session.setCategory(.playback)
+        try session.setMode(.spokenAudio)
+        try session.setActive(true, options: [])
+    }
+
+    private func showAudioSessionError() {
+        let alert = UIAlertController(title: "Playback Error", message: "There was an error configuring the audio system for playback", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     //MARK:- Actions
@@ -75,16 +167,52 @@ class PlayerViewController: UIViewController {
     }
     
     @IBAction func transportSliderChanged(_ sender: UISlider) {
+        guard let player = player else { return }
+        guard let currentItem = player.currentItem else { return }
+        
+        let seconds = currentItem.duration.seconds * Double(transportSlider.value)
+        let time = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        player.seek(to: time)
+        
     }
     
     @IBAction func skipBack(_ sender: UIButton) {
+        guard let player = player else { return }
+        
+        let time = player.currentTime() - skipTime
+        if time > CMTime.zero {
+            player.seek(to: time)
+            updateSlider(for: time)
+        } else {
+            player.seek(to: .zero)
+            updateSlider(for: .zero)
+        }
+        
     }
     
     @IBAction func skipForward(_ sender: UIButton) {
+        guard let player = player else { return }
+        guard let currentItem = player.currentItem else { return }
+        
+        let time = player.currentTime() + skipTime
+        if time < currentItem.duration {
+            player.seek(to: time)
+            updateSlider(for: time)
+        } else {
+            player.seek(to: currentItem.duration)
+            updateSlider(for: currentItem.duration)
+        }
     }
     
     @IBAction func playPause(_ sender: UIButton) {
         
+        let wasPlaying = playPauseButton.isSelected
         playPauseButton.isSelected.toggle()
+        
+        if wasPlaying {
+            player?.pause()
+        } else {
+            player?.play()
+        }
     }
 }
