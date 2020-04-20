@@ -115,6 +115,10 @@ class SubscriptionStore {
         
         let status = EpisodeStatusEntity(context: context)
         status.episode = episode
+        status.hasCompleted = false
+        status.isCurrentlyPlaying = false
+        status.lastListenTime = 0
+        status.lastPlayedAt = Date()
         return status
     }
 }

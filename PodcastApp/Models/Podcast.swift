@@ -22,4 +22,14 @@ class Podcast {
         self.id = id
         self.feedURL = feedURL
     }
+    
+    init(from entity: PodcastEntity) {
+        id = entity.id!
+        feedURL = URL(string: entity.feedURLString!)!
+        title = entity.title
+        author = entity.author
+        description = entity.podcastDescription
+        primaryGenre = entity.genre
+        artworkURL = entity.artworkURL
+    }
 }

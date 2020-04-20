@@ -37,6 +37,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.window!.rootViewController = storyboard.instantiateInitialViewController()
+            
+            let store = SubscriptionStore(with: PersistenceManager.shared.mainContext)
+            do {
+                if let currentStatus = try store.findCurrentlyPlayingEpisode() {
+                    guard let episodeEntity = currentStatus.episode else { return }
+                    let podcastEntity = episodeEntity.podcast
+                    
+                    let episode = Episode(from: episodeEntity)
+                    let podcast = Podcast(from: podcastEntity)
+                    
+                    let playerVC = PlayerViewController.shared
+                    playerVC.setEpisode(episode, podcast: podcast, autoPlay: false)
+                    
+                    self.window?.rootViewController?.present(playerVC, animated: true, completion: nil)
+                }
+            } catch {
+                print("Error trying to fetch currently playing episode \(error.localizedDescription)")
+            }
         }
     }
 
@@ -66,8 +84,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        trySave()
     }
 
+    private func trySave() {
+        do {
+            print("Saving changes....")
+            try PersistenceManager.shared.mainContext.save()
+        } catch {
+            print("Error saving changes in scene delegate: \(error.localizedDescription)")
+        }
+    }
 
 }
 

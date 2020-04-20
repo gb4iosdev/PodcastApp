@@ -15,4 +15,16 @@ class Episode {
     var publicationDate: Date?
     var duration: TimeInterval?
     var enclosureURL: URL?  //URL to the .mp3 sound file to download & play
+    
+    init() {
+    }
+    
+    init(from entity: EpisodeEntity) {
+        identifier = entity.identifier
+        title = entity.title
+        description = entity.episodeDescription
+        publicationDate = entity.publicationDate
+        duration = entity.duration
+        enclosureURL = entity.enclosureURL
+    }
 }

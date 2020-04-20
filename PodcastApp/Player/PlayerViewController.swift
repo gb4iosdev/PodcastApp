@@ -40,6 +40,7 @@ class PlayerViewController: UIViewController {
     
     private var player: AVPlayer?
     private var timeObservationToken: Any?
+    private var statusObservationToken: Any?
     private var skipTime = CMTime(seconds: 10, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
     
     private var subscriptionStore: SubscriptionStore!
@@ -82,7 +83,7 @@ class PlayerViewController: UIViewController {
         playerBar.playPauseButton.setImage(tintedImage, for: [.selected, .highlighted])
     }
     
-    func setEpisode(_ episode: Episode, podcast: Podcast) {
+    func setEpisode(_ episode: Episode, podcast: Podcast, autoPlay: Bool = true) {
         
         getEpisodeStatus(for: episode)
         updateUI(for: episode, podcast: podcast)
@@ -94,7 +95,10 @@ class PlayerViewController: UIViewController {
         cleanupPlayerState()
         
         preparePlayer(audioURL: audioURL) {
-            self.player?.play()   //Delay here - Will start playing when enough of the song is buffered
+            if autoPlay {
+                self.player?.play()   //Delay here - Will start playing when enough of the song is buffered
+                self.togglePlayPauseButton(isPlaying: true)
+            }
         }
         
     }
@@ -110,19 +114,51 @@ class PlayerViewController: UIViewController {
     }
     
     private func preparePlayer(audioURL: URL, onReady: @escaping () -> Void) {
+        
         let playerItem = AVPlayerItem(url: audioURL)
         let player = AVPlayer(playerItem: playerItem)
-        
-        togglePlayPauseButton(isPlaying: true)
-        
         self.player = player
         
-        transportSlider.isEnabled = true
+        let time = episodeStatus?.lastListenTime ?? 0
         transportSlider.value = 0
+        transportSlider.isEnabled = false
+        transportSlider.alpha = 0.5
         
+        statusObservationToken = playerItem.observe(\.status) { (playerItem, change) in
+            print("Status: ")
+            switch playerItem.status {
+            case .failed:
+                print("Failed.")
+                print("Error: ", playerItem.error?.localizedDescription ?? "<?>")
+
+            case .readyToPlay:
+                print("Ready to play")
+
+                player.seek(to: CMTime(seconds: time, preferredTimescale: 1))
+                self.transportSlider.value = Float(time / max(playerItem.duration.seconds, 1))
+                self.transportSlider.alpha = 1
+                self.transportSlider.isEnabled = true
+
+                onReady()
+
+            case .unknown:
+                print("Unknown")
+            @unknown default:
+                break
+            }
+        }
+        
+        addTimeObserver()
+    }
+    
+    private func addTimeObserver() {
+        
+        guard let player = self.player else { return }
         let interval = CMTime(seconds: 0.25, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         timeObservationToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             self?.updateSlider(for: time)
+            
+            self?.episodeStatus?.lastListenTime = time.seconds
             
             self?.timeProgressedLabel.text = time.formattedString
             if let duration = player.currentItem?.duration {
