@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController, UISearchResultsUpdating {
+class SearchViewController: PodcastListTableViewController, UISearchResultsUpdating {
     
     var recommendedPodcasts: [SearchResult] = []
     var results: [SearchResult] = []
@@ -17,10 +17,6 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.backgroundColor = Theme.Colours.grey4
-        tableView.separatorColor = Theme.Colours.grey3
-        tableView.separatorInset = .zero
         
         let search = UISearchController(searchResultsController: nil)
         search.obscuresBackgroundDuringPresentation = false
@@ -116,11 +112,4 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
             }
         }
     }
-    
-    private func showPodcast(with lookupInfo: PodcastLookupInfo) {
-        let detailVC = UIStoryboard(name: "PodcastDetail", bundle: nil).instantiateInitialViewController() as! PodcastDetailViewController
-        detailVC.podcastLookupInfo = lookupInfo
-        show(detailVC, sender: self)
-    }
-
 }

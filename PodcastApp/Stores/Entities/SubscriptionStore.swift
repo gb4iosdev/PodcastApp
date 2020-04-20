@@ -11,26 +11,10 @@ import CoreData
 
 class SubscriptionStore {
     
-    static var shared = SubscriptionStore()
+    private let context: NSManagedObjectContext
     
-    private let persistentContainer: NSPersistentContainer
-    
-    var mainContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-    
-    private init() {
-        persistentContainer = NSPersistentContainer(name: "Subscriptions")
-    }
-    
-    func initializeModel() {
-        persistentContainer.loadPersistentStores { (storeDescription, error) in
-            if let error = error {
-                fatalError("Core Data Error: \(error.localizedDescription)")
-            } else {
-                print("Loaded Store: \(storeDescription.url?.absoluteString ?? "nil")")
-            }
-        }
+    init(with context: NSManagedObjectContext) {
+        self.context = context
     }
     
     func isSubscribed(to id: String) -> Bool {
@@ -46,12 +30,20 @@ class SubscriptionStore {
         fetch.fetchLimit = 1
         fetch.predicate = NSPredicate(format: "podcast.id == %@", podcastId)
         
-        return try mainContext.fetch(fetch).first
+        return try context.fetch(fetch).first
+    }
+    
+    func fetchSubscriptions() throws -> [SubscriptionEntity] {
+        let fetchRequest: NSFetchRequest<SubscriptionEntity> = SubscriptionEntity.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.relationshipKeyPathsForPrefetching = ["podcast"]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dateSubscribed", ascending: false)]
+        return try context.fetch(fetchRequest)
     }
     
     @discardableResult
     func subscribe(to podcast: Podcast) throws -> SubscriptionEntity {
-        let podcastEntity = PodcastEntity(context: mainContext)
+        let podcastEntity = PodcastEntity(context: context)
         podcastEntity.id = podcast.id
         podcastEntity.title = podcast.title
         podcastEntity.podcastDescription = podcast.description
@@ -60,19 +52,33 @@ class SubscriptionStore {
         podcastEntity.artworkURLString = podcast.artworkURL?.absoluteString
         podcastEntity.feedURLString = podcast.feedURL.absoluteString
         
-        let subscription = SubscriptionEntity(context: mainContext)
+        let subscription = SubscriptionEntity(context: context)
         subscription.dateSubscribed = Date()
         subscription.podcast = podcastEntity
         
-        try mainContext.save()
+        try context.save()
+        
+        let change = SubscriptionsChanged(subscribed: [podcast.id])
+        NotificationCenter.default.post(change)
         
         return subscription
     }
     
     func unsubscribe(from podcast: Podcast) throws {
         if let sub = try findSubscription(with: podcast.id) {
-            mainContext.delete(sub)
-            try mainContext.save()
+            context.delete(sub)
+            try context.save()
+            
+            let change = SubscriptionsChanged(unsubscribed: [podcast.id])
+            NotificationCenter.default.post(change)
         }
+    }
+    
+    func findPodcast(with podcastId: String) throws -> PodcastEntity? {
+        let fetch: NSFetchRequest<PodcastEntity> = PodcastEntity.fetchRequest()
+        fetch.fetchLimit = 1
+        fetch.predicate = NSPredicate(format: "id == %@", podcastId)
+        
+        return try context.fetch(fetch).first
     }
 }

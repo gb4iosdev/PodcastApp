@@ -13,12 +13,12 @@ class PodcastDetailViewController: UITableViewController {
     
     var podcastLookupInfo: PodcastLookupInfo!
     
-    private let subscriptionStore = SubscriptionStore.shared
+    private var store: SubscriptionStore!
     
     private var podcast: Podcast? {
         didSet {
             podcastViewModel = podcast.flatMap {
-                PodcastViewModel(podcast: $0, isSubscribed: subscriptionStore.isSubscribed(to: $0.id))
+                PodcastViewModel(podcast: $0, isSubscribed: store.isSubscribed(to: $0.id))
             }
         }
     }
@@ -34,6 +34,8 @@ class PodcastDetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        store = SubscriptionStore(with: PersistenceManager.shared.mainContext)
         
         tableView.backgroundColor = Theme.Colours.grey5
         tableView.separatorColor = Theme.Colours.grey3
@@ -142,9 +144,9 @@ extension PodcastDetailViewController {
         let isSubscribing = !sender.isSelected
         do {
             if isSubscribing {
-                try subscriptionStore.subscribe(to: podcast)
+                try store.subscribe(to: podcast)
             } else {
-                try subscriptionStore.unsubscribe(from: podcast)
+                try store.unsubscribe(from: podcast)
             }
             sender.isSelected.toggle()
         } catch {

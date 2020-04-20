@@ -10,6 +10,8 @@ import CoreMedia
 
 extension CMTime {
     var formattedString: String {
+        
+        guard !(seconds.isNaN || seconds.isInfinite) else { return "" }
         //1:12:34
         //23:09
         let totalSeconds = seconds

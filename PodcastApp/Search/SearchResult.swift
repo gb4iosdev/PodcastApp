@@ -44,3 +44,15 @@ extension SearchResult {
             feedURL: URL(string: searchResult.feedUrl))
     }
 }
+
+extension SearchResult: PodcastCellModel {
+    var titleText: String? {
+        return title
+    }
+    
+    var authorText: String? {
+        return author
+    }
+    
+    var artwork: URL? { return artworkUrl }
+}

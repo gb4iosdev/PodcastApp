@@ -11,5 +11,5 @@ import CoreData
 
 @objc(PodcastEntity)
 public class PodcastEntity: NSManagedObject {
-
+    
 }

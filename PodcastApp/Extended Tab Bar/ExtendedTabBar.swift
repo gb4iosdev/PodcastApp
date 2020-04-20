@@ -43,6 +43,25 @@ class ExtendedTabBar: UITabBar {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        <#code#>
+        let originalSize = super.sizeThatFits(size)
+        
+        guard playerBarVisible else { return originalSize }
+        
+        var modifiedSize = originalSize
+        modifiedSize.height += playerBarHeight
+        
+        return modifiedSize
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard playerBarVisible else { return }
+        
+        for subview in subviews {
+            if let control = subview as? UIControl {
+                control.frame.origin.y += playerBarHeight
+                control.frame.size.height -= playerBarHeight
+            }
+        }
     }
 }
