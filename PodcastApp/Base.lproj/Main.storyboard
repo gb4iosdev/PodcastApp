@@ -17,6 +17,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="jUF-zo-5M9" kind="relationship" relationship="viewControllers" id="wUe-DJ-Hd6"/>
+                        <segue destination="h3x-WQ-Pdl" kind="relationship" relationship="viewControllers" id="GjH-Bf-Orq"/>
                         <segue destination="va1-Ai-cxd" kind="relationship" relationship="viewControllers" id="4de-VA-5Ww"/>
                     </connections>
                 </tabBarController>
@@ -28,17 +29,27 @@
         <scene sceneID="w7W-yy-f7X">
             <objects>
                 <viewControllerPlaceholder storyboardName="Search" id="va1-Ai-cxd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="mkX-ba-uYc"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="mkX-ba-uYc" userLabel="Search"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pTk-jX-gn1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1058" y="551"/>
         </scene>
+        <!--Playlist-->
+        <scene sceneID="e6T-eI-Ssg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Playlist" id="h3x-WQ-Pdl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Priority" id="7HE-Df-DVp" userLabel="Priority"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rDk-5x-yUy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1050" y="652"/>
+        </scene>
         <!--MyPodcasts-->
         <scene sceneID="fT2-JC-inB">
             <objects>
                 <viewControllerPlaceholder storyboardName="MyPodcasts" id="jUF-zo-5M9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="3tt-yK-U2P"/>
+                    <tabBarItem key="tabBarItem" title="MyPodcasts" id="3tt-yK-U2P" userLabel="I"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTi-cg-oIr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

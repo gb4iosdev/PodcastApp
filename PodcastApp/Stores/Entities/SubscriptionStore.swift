@@ -81,4 +81,40 @@ class SubscriptionStore {
         
         return try context.fetch(fetch).first
     }
+    
+    func fetchPlaylist() throws -> [EpisodeEntity] {
+        return try context.fetch(playlistFetchRequest())
+    }
+    
+    func playlistFetchRequest() -> NSFetchRequest<EpisodeEntity> {
+        let fetch: NSFetchRequest<EpisodeEntity> = EpisodeEntity.fetchRequest()
+        fetch.predicate = NSPredicate(format: "podcast.subscription != nil")
+        fetch.sortDescriptors = [NSSortDescriptor(key: "publicationDate", ascending: false)]
+        return fetch
+    }
+    
+    func findCurrentlyPlayingEpisode() throws -> EpisodeStatusEntity? {
+        let fetch: NSFetchRequest<EpisodeStatusEntity> = EpisodeStatusEntity.fetchRequest()
+        fetch.fetchLimit = 1
+        fetch.predicate = NSPredicate(format: "isCurrentlyPlaying == YES")
+        
+        return try context.fetch(fetch).first
+    }
+    
+    func getStatus(for episode: Episode) throws -> EpisodeStatusEntity? {
+        guard let identifier = episode.identifier else { return nil }
+        let fetch: NSFetchRequest<EpisodeEntity> = EpisodeEntity.fetchRequest()
+        fetch.fetchLimit = 1
+        fetch.predicate = NSPredicate(format: "identifier == %@", identifier)
+        
+        guard let episode = try context.fetch(fetch).first else { return nil }
+        
+        if let status = episode.status {
+            return status
+        }
+        
+        let status = EpisodeStatusEntity(context: context)
+        status.episode = episode
+        return status
+    }
 }

@@ -35,6 +35,7 @@ class PersistenceManager {
             if let error = error {
                 fatalError("Core Data Error: \(error.localizedDescription)")
             } else {
+                self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
                 self.isLoaded = true
                 print("Loaded Store: \(storeDescription.url?.absoluteString ?? "nil")")
                 completion()

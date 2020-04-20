@@ -47,5 +47,9 @@ class ImageAPI: API {
             
         }
     }
+    
+    func cancelFetch() {
+        downloadingURL = nil
+    }
 }
 

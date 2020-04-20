@@ -27,14 +27,14 @@ class ImportEpisodesOperation: BaseOperation {
         subscriptionStore = SubscriptionStore(with: context)
         
         //load the Podcast
-        print("Importing Episodes -> for podcast: \(podcastId)")
+        print("Importing Episodes -> Loading podcast: \(podcastId)")
         guard let podcastEntity = loadPodcast() else {
             finish()
             return
         }
         
         //Import the feed
-        print("Importing Episodes -> fetching the feed for: \(podcastEntity.title ?? "<?>") - \(podcastEntity.feedURLString)")
+        print("Importing Episodes -> Fetching the feed for: \(podcastEntity.title ?? "<?>") - \(podcastEntity.feedURLString ?? "<?>")")
         
         guard let lookup = podcastEntity.lookupInfo else {
             print("Couldn't build lookup info - id or feedURL is nil")

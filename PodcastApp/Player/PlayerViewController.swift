@@ -41,10 +41,15 @@ class PlayerViewController: UIViewController {
     private var player: AVPlayer?
     private var timeObservationToken: Any?
     private var skipTime = CMTime(seconds: 10, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+    
+    private var subscriptionStore: SubscriptionStore!
+    private var episodeStatus: EpisodeStatusEntity?
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        subscriptionStore = SubscriptionStore(with: PersistenceManager.shared.mainContext)
         
         self.playerBar.isHidden = true
 
@@ -78,20 +83,23 @@ class PlayerViewController: UIViewController {
     }
     
     func setEpisode(_ episode: Episode, podcast: Podcast) {
-        titleLabel.text = episode.title
         
-        //Retrieve Image:  Ensure we have a url to use:
-        guard let url = podcast.artworkURL else {
-            return
+        getEpisodeStatus(for: episode)
+        updateUI(for: episode, podcast: podcast)
+        
+        guard let audioURL = episode.enclosureURL else { return }
+        
+        beginAudioSession()
+        
+        cleanupPlayerState()
+        
+        preparePlayer(audioURL: audioURL) {
+            self.player?.play()   //Delay here - Will start playing when enough of the song is buffered
         }
         
-        fetchImage(at: url, for: artworkImageView)
-        fetchImage(at: url, for: playerBar.imageView)   //Should use the cache for this.
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.playerBar.isHidden = false
-        }
-        
+    }
+    
+    private func beginAudioSession() {
         //Setup Audio Session:
         do {
             try configureAudioSession()
@@ -99,19 +107,12 @@ class PlayerViewController: UIViewController {
             print("ERROR: \(error.localizedDescription)")
             showAudioSessionError()
         }
+    }
+    
+    private func preparePlayer(audioURL: URL, onReady: @escaping () -> Void) {
+        let playerItem = AVPlayerItem(url: audioURL)
+        let player = AVPlayer(playerItem: playerItem)
         
-        //Stop any existing player from playing
-        if let player = player {
-            player.pause()
-            if let previousTimeObservation = timeObservationToken {
-                player.removeTimeObserver(previousTimeObservation)
-            }
-            self.player = nil
-        }
-        
-        guard let audioURL = episode.enclosureURL else { return }
-        let player = AVPlayer(url: audioURL)
-        player.play()   //Delay here - Will start playing when enough of the song is buffered
         togglePlayPauseButton(isPlaying: true)
         
         self.player = player
@@ -130,6 +131,53 @@ class PlayerViewController: UIViewController {
             } else {
                 self?.timeRemainingLabel.text = "--"
             }
+        }
+    }
+    
+    private func getEpisodeStatus(for episode: Episode) {
+        do {
+            if let previousStatus = try subscriptionStore.findCurrentlyPlayingEpisode() {
+                previousStatus.isCurrentlyPlaying = false
+            }
+            
+            episodeStatus = try subscriptionStore.getStatus(for: episode)
+            episodeStatus?.isCurrentlyPlaying = true
+            episodeStatus?.lastPlayedAt = Date()
+            
+            try PersistenceManager.shared.mainContext.save()
+        } catch {
+            print("Error getting Episode Status: \(error.localizedDescription)")
+        }
+        
+        if episodeStatus == nil {
+            print("WARNING: Episode status was not returned.  No status will be saved.")
+        }
+    }
+    
+    private func updateUI(for episode: Episode, podcast: Podcast) {
+        titleLabel.text = episode.title
+        
+        //Retrieve Image:  Ensure we have a url to use:
+        guard let url = podcast.artworkURL else {
+            return
+        }
+        
+        fetchImage(at: url, for: artworkImageView)
+        fetchImage(at: url, for: playerBar.imageView)   //Should use the cache for this.
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.playerBar.isHidden = false
+        }
+    }
+    
+    private func cleanupPlayerState() {
+        //Stop any existing player from playing
+        if let player = player {
+            player.pause()
+            if let previousTimeObservation = timeObservationToken {
+                player.removeTimeObserver(previousTimeObservation)
+            }
+            self.player = nil
         }
     }
     

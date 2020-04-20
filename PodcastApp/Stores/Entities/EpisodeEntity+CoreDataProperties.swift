@@ -24,4 +24,5 @@ extension EpisodeEntity {
     @NSManaged public var publicationDate: Date
     @NSManaged public var title: String
     @NSManaged public var podcast: PodcastEntity
+    @NSManaged public var status: EpisodeStatusEntity?
 }

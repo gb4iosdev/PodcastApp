@@ -32,7 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //Persistence
         PersistenceManager.shared.initializeModel {
-            //FeedImporter.shared.startListening()
+            FeedImporter.shared.startListening()
+            FeedImporter.shared.updatePodcasts()    //Loads episodes in the background
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.window!.rootViewController = storyboard.instantiateInitialViewController()
